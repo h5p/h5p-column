@@ -1,0 +1,24 @@
+[
+  {
+    "name": "content",
+    "label": "Content",
+    "type": "list",
+    "min": 1,
+    "entity": "content",
+    "field": {
+      "name": "content",
+      "type": "library",
+      "label": "Content type",
+      "description": "Library for this content.",
+      "options": [
+        "H5P.MultiChoice 1.0",
+        "H5P.DragQuestion 1.0",
+        "H5P.Blanks 1.0",
+        "H5P.RichText 1.0",
+        "H5P.InteractiveVideo 1.2",
+        "H5P.QuestionSet 1.2",
+        "H5P.Columns 1.0"
+      ]
+    }
+  }
+]

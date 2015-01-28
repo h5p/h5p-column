@@ -1,0 +1,27 @@
+{
+  "title": "Column",
+  "description": "Content holder displaying content in a column.",
+  "contentType": "instructional",
+  "majorVersion": 1,
+  "minorVersion": 0,
+  "patchVersion": 0,
+  "runnable": 1,
+  "fullscreen": 0,
+  "machineName": "H5P.Column",
+  "author": "Joubel AS",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 1
+  },
+  "license": "MIT",
+  "preloadedJs": [
+    {
+      "path": "js/column.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "css/column.css"
+    }
+  ]
+}
