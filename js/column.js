@@ -14,7 +14,7 @@ H5P.Column = (function ($) {
       return new H5P.Column(content, contentId);
     }
 
-    H5P.QuestionContainer.call(this);
+    H5P.QuestionContainer.call(this, content.content, contentId);
     
     var defaults = {
       content: [],
@@ -29,7 +29,7 @@ H5P.Column = (function ($) {
       var contentData = this.params.content[i];
 
       // override content parameters.
-      if (this.params.override.overrideButtons) {
+      if (this.params.override && this.params.override.overrideButtons) {
         // Extend subcontent with the overrided settings.
         $.extend(contentData.params.behaviour, {
           enableRetry: this.params.override.overrideRetry,
