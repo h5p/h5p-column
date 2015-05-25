@@ -36,10 +36,6 @@ H5P.Column = (function ($) {
           enableSolutionsButton: this.params.override.overrideShowSolutionButton
         });
       }
-
-      $.extend(contentData.params, {
-        postUserStatistics: false
-      });
       
       this.content.push(H5P.newRunnable(contentData, contentId));
     }
