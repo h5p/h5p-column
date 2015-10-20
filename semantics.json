@@ -22,5 +22,30 @@
         "H5P.Columns 1.0"
       ]
     }
+  },
+  {
+    "name": "type",
+    "type": "select",
+    "label": "Type",
+    "description": "What kind of content will be in this column?",
+    "options": [
+      {
+        "value": "div",
+        "label": "Misc (div tag will be used)"
+      },
+      {
+        "value": "section",
+        "label": "Section of an article (section tag will be used)"
+      },
+      {
+        "value": "article",
+        "label": "Self standing article (section tag will be used)"
+      },
+      {
+        "value": "aside",
+        "label": "Sidebar (aside tag will be used)"
+      }
+    ],
+    "default": "div"
   }
 ]

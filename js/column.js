@@ -46,12 +46,15 @@ H5P.Column = (function ($) {
 
   // Function for attaching the pages to a dom element.
   C.prototype.attach = function (target) {
+    var $target;
     if (typeof(target) === "string") {
-      this.$myDom = $('#' + target);
+      $target = $('#' + target);
     }
     else {
-      this.$myDom = $(target);
+      $target = $(target);
     }
+
+    this.$myDom = $('<' + this.params.type + '>').appendTo($target);
 
     // Attach content
     for (var i = 0; i < this.content.length; i++) {
