@@ -10,9 +10,7 @@ var H5P = H5P || {};
 H5P.Column = (function ($) {
         
   function C (content, contentId) {
-    if (!(this instanceof H5P.Column)) {
-      return new H5P.Column(content, contentId);
-    }
+    var self = this;
     
     var defaults = {
       content: [],
@@ -25,8 +23,11 @@ H5P.Column = (function ($) {
     // Instantiate content instances
     for (var i = 0; i < this.params.content.length; i++) {
       var contentData = this.params.content[i];
-      
-      this.content.push(H5P.newRunnable(contentData, contentId));
+      var child = H5P.newRunnable(contentData, contentId);
+      child.on('resize', function() {
+        self.trigger('resize');
+      });
+      this.content.push(child);
     }
   }
 
@@ -51,7 +52,6 @@ H5P.Column = (function ($) {
       this.$myDom.append($contentHolder);
     }
 
-    this.$.trigger('resize');
     return this;
   };
 
