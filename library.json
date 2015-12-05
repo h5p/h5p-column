@@ -9,6 +9,9 @@
   "fullscreen": 0,
   "machineName": "H5P.Column",
   "author": "Joubel AS",
+  "embedTypes": [
+    "iframe"
+  ],
   "coreApi": {
     "majorVersion": 1,
     "minorVersion": 1
