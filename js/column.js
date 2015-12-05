@@ -13,8 +13,6 @@ H5P.Column = (function ($) {
     if (!(this instanceof H5P.Column)) {
       return new H5P.Column(content, contentId);
     }
-
-    H5P.QuestionContainer.call(this, content.content, contentId);
     
     var defaults = {
       content: [],
@@ -27,22 +25,10 @@ H5P.Column = (function ($) {
     // Instantiate content instances
     for (var i = 0; i < this.params.content.length; i++) {
       var contentData = this.params.content[i];
-
-      // override content parameters.
-      if (this.params.override && this.params.override.overrideButtons) {
-        // Extend subcontent with the overrided settings.
-        $.extend(contentData.params.behaviour, {
-          enableRetry: this.params.override.overrideRetry,
-          enableSolutionsButton: this.params.override.overrideShowSolutionButton
-        });
-      }
       
       this.content.push(H5P.newRunnable(contentData, contentId));
     }
   }
-  
-  C.prototype = Object.create(H5P.QuestionContainer.prototype);
-  C.prototype.constructor = C;
 
   // Function for attaching the pages to a dom element.
   C.prototype.attach = function (target) {
