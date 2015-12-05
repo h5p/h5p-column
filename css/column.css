@@ -1,16 +1,3 @@
-.h5p-column-content.h5p-text {
-  padding: 1em;
-}
-
-.h5p-column-content.h5p-multichoice {
-  padding: 1em 0.5em;
-}
-
-.h5p-column-content.h5p-text p:last-child{
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
 .h5p-column-content {
   border-bottom: 1px solid #CCCCCC;
 }
