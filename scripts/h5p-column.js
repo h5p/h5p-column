@@ -1,7 +1,7 @@
 H5P.Column = (function (EventDispatcher) {
 
   /**
-   * Glossary Test Constructor
+   * Column Constructor
    *
    * @class
    * @param {Object} params Describes task behavior
@@ -11,14 +11,72 @@ H5P.Column = (function (EventDispatcher) {
   function Column(params, id, data) {
     var self = this;
 
-    // Initialize event inheritance
-    EventDispatcher.call(self);
-
     // Column wrapper element
     var wrapper;
 
     // H5P content in the column
     var instances = [];
+
+    // Number of tasks amoung instances
+    var numTasks = 0;
+
+    // Number of tasks that has been completed
+    var numTasksCompleted = 0;
+
+    // Keep track of result for each task
+    var tasksResultEvent = [];
+
+    /**
+     *
+     *
+     * @private
+     */
+    var completed = function () {
+      // Sum all scores
+      var raw = 0;
+      var max = 0;
+
+      for (var i = 0; i < tasksResultEvent.length; i++) {
+        var event = tasksResultEvent[i];
+        raw += event.getScore();
+        max += event.getMaxScore();
+      }
+
+      self.triggerXAPICompleted(raw, max);
+    };
+
+    /**
+     * Generates an event handler for the given task index.
+     *
+     * @private
+     * @param {number} taskIndex
+     * @return {function} xAPI event handler
+     */
+    var trackScoring = function (taskIndex) {
+      return function (event) {
+        if (event.getScore() === null) {
+          return; // Skip, not relevant
+        }
+
+        if (tasksResultEvent[taskIndex] === undefined) {
+          // Update number of compelted tasks
+          numTasksCompleted++;
+        }
+
+        // Keep track of latest event with result
+        tasksResultEvent[taskIndex] = event;
+
+        // Track progress
+        var progressed = self.createXAPIEventTemplate('progressed');
+        progressed.data.statement.object.definition.extensions['http://id.tincanapi.com/extension/ending-point'] = taskIndex + 1;
+        self.trigger(progressed);
+
+        // Check to see if we're done
+        if (numTasksCompleted === numTasks) {
+          completed(); // Done
+        }
+      };
+    };
 
     /**
      * @private
@@ -39,8 +97,16 @@ H5P.Column = (function (EventDispatcher) {
       // Create content instance
       var instance = H5P.newRunnable(content, id, H5P.jQuery(container), true); // TODO: Add content state ?
 
-      // Bubble events
+      // Bubble resize events
       bubbleUp(instance, 'resize', self);
+
+      // Check if instance is a task
+      if (isTask(instance)) {
+        // Tasks requires completion
+
+        instance.on('xAPI', trackScoring(numTasks));
+        numTasks++;
+      }
 
       // Keep track of all instances
       instances.push(instance);
@@ -82,11 +148,10 @@ H5P.Column = (function (EventDispatcher) {
 
     // Resize children to fit inside parent
     bubbleDown(self, 'resize', instances);
-  }
 
-  // Extends the event dispatcher
-  Column.prototype = Object.create(EventDispatcher.prototype);
-  Column.prototype.constructor = Column;
+    self.on('xAPI', function (event) { console.log(event.getVerb(), event.data.statement); });
+    self.setActivityStarted();
+  }
 
   /**
    * Makes it easy to bubble events from parent to children
@@ -127,7 +192,44 @@ H5P.Column = (function (EventDispatcher) {
       // Reset
       target.bubblingUpwards = false;
     });
-  }
+  };
+
+  /**
+   * Definition of which content types are tasks
+   */
+  var isTasks = [
+    'H5P.ImageHotspotQuestion',
+    "H5P.Blanks",
+    "H5P.SingleChoiceSet",
+    "H5P.MultiChoice",
+    "H5P.DragQuestion",
+    "H5P.Summary",
+    "H5P.DragText",
+    "H5P.MarkTheWords",
+    "H5P.MemoryGame",
+    "H5P.Flashcards",
+    "H5P.QuestionSet",
+    "H5P.InteractiveVideo",
+    "H5P.CoursePresentation"
+  ];
+
+  /**
+   * Check if the given content instance is a task (will give a score)
+   *
+   * @param {Object} instance
+   * @return {boolean}
+   */
+  function isTask(instance) {
+    // Go through the valid task names
+    for (var i = 0; i < isTasks.length; i++) {
+      // Check against library info. (instanceof is broken in H5P.newRunnable)
+      if (instance.libraryInfo.machineName === isTasks[i]) {
+        return true;
+      }
+    }
+
+    return false;
+  };
 
   return Column;
 })(H5P.EventDispatcher);
