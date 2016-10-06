@@ -27,7 +27,7 @@ H5P.Column = (function (EventDispatcher) {
     var tasksResultEvent = [];
 
     /**
-     *
+     * Calculate score and trigger completed event.
      *
      * @private
      */
@@ -79,11 +79,14 @@ H5P.Column = (function (EventDispatcher) {
     };
 
     /**
-     * @private
+     * Creates a new ontent instance from the given content parameters and
+     * then attaches it the wrapper. Sets up event listeners.
      *
+     * @private
      * @param {Object} content Parameters
+     * @param {Object} [data] Data
      */
-    var addRunnable = function (content) {
+    var addRunnable = function (content, data) {
       // Create container for content
       var container = document.createElement('div');
       container.classList.add('h5p-column-content');
@@ -95,7 +98,7 @@ H5P.Column = (function (EventDispatcher) {
       }
 
       // Create content instance
-      var instance = H5P.newRunnable(content, id, H5P.jQuery(container), true); // TODO: Add content state ?
+      var instance = H5P.newRunnable(content, id, H5P.jQuery(container), true, data);
 
       // Bubble resize events
       bubbleUp(instance, 'resize', self);
@@ -116,6 +119,23 @@ H5P.Column = (function (EventDispatcher) {
     };
 
     /**
+     * Help get data for content at given index
+     *
+     * @private
+     * @param {number} index
+     * @returns {Object} Data object with previous state
+     */
+    var grabContentData = function (index) {
+      if (data.previousState !== undefined &&
+          data.previousState.instances !== undefined &&
+          data.previousState.instances[index] !== undefined) {
+        return {
+          previousState: data.previousState.instances[index]
+        };
+      }
+    };
+
+    /**
      * Creates a wrapper and the column content the first time the column
      * is attached to the DOM.
      *
@@ -127,7 +147,7 @@ H5P.Column = (function (EventDispatcher) {
 
       // Add content
       for (var i = 0; i < params.content.length; i++) {
-        addRunnable(params.content[i]);
+        addRunnable(params.content[i], grabContentData(i));
       }
     };
 
@@ -144,6 +164,34 @@ H5P.Column = (function (EventDispatcher) {
 
       // Add to DOM
       $container.addClass('h5p-column').html('').append(wrapper);
+    };
+
+    /**
+     * Create object containing information about the current state
+     * of this content.
+     *
+     * @return {Object}
+     */
+    self.getCurrentState = function () {
+      // Get previous state object or create new state object
+      var state = (data.previousState ? data.previousState : {});
+      if (!state.instances) {
+        state.instances = [];
+      }
+
+      // Grabv the current state for each instance
+      for (var i = 0; i < instances.length; i++) {
+        var instance = instances[i]
+
+        if (instance.getCurrentState instanceof Function ||
+            typeof instance.getCurrentState === 'function') {
+
+          state.instances[i] = instance.getCurrentState();
+        }
+      }
+
+      // Done
+      return state;
     };
 
     // Resize children to fit inside parent
