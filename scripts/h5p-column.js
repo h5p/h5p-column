@@ -1,4 +1,4 @@
-H5P.Column = (function (EventDispatcher) {
+H5P.Column = (function () {
 
   /**
    * Column Constructor
@@ -280,4 +280,4 @@ H5P.Column = (function (EventDispatcher) {
   };
 
   return Column;
-})(H5P.EventDispatcher);
+})();
