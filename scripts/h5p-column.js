@@ -42,7 +42,7 @@ H5P.Column = (function () {
         max += event.getMaxScore();
       }
 
-      self.triggerXAPICompleted(raw, max);
+      self.triggerXAPIScored(raw, max, 'completed');
     };
 
     /**
