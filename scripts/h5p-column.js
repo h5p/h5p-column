@@ -126,13 +126,17 @@ H5P.Column = (function () {
      * @returns {Object} Data object with previous state
      */
     var grabContentData = function (index) {
+      var contentData = {
+        parent: self
+      };
+
       if (data.previousState !== undefined &&
           data.previousState.instances !== undefined &&
           data.previousState.instances[index] !== undefined) {
-        return {
-          previousState: data.previousState.instances[index]
-        };
+        data.previousState = data.previousState.instances[index];
       }
+
+      return data;
     };
 
     /**
