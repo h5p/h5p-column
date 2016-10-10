@@ -84,9 +84,9 @@ H5P.Column = (function () {
      *
      * @private
      * @param {Object} content Parameters
-     * @param {Object} [data] Data
+     * @param {Object} [contentData] Content Data
      */
-    var addRunnable = function (content, data) {
+    var addRunnable = function (content, contentData) {
       // Create container for content
       var container = document.createElement('div');
       container.classList.add('h5p-column-content');
@@ -98,7 +98,7 @@ H5P.Column = (function () {
       }
 
       // Create content instance
-      var instance = H5P.newRunnable(content, id, H5P.jQuery(container), true, data);
+      var instance = H5P.newRunnable(content, id, H5P.jQuery(container), true, contentData);
 
       // Remove any fullscreen buttons
       disableFullscreen(instance);
@@ -136,10 +136,10 @@ H5P.Column = (function () {
       if (data.previousState !== undefined &&
           data.previousState.instances !== undefined &&
           data.previousState.instances[index] !== undefined) {
-        data.previousState = data.previousState.instances[index];
+        contentData.previousState = data.previousState.instances[index];
       }
 
-      return data;
+      return contentData;
     };
 
     /**
