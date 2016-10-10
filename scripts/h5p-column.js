@@ -100,6 +100,9 @@ H5P.Column = (function () {
       // Create content instance
       var instance = H5P.newRunnable(content, id, H5P.jQuery(container), true, data);
 
+      // Remove any fullscreen buttons
+      disableFullscreen(instance);
+
       // Bubble resize events
       bubbleUp(instance, 'resize', self);
 
@@ -281,6 +284,30 @@ H5P.Column = (function () {
     }
 
     return false;
+  };
+
+  /**
+   * Remove custom fullscreen buttons from sub content.
+   * (A bit of a hack, there should have been some sort of override…)
+   *
+   * @param {Object} instance
+   */
+  function disableFullscreen(instance) {
+    switch (instance.libraryInfo.machineName) {
+      case 'H5P.CoursePresentation':
+        if (instance.$fullScreenButton) {
+          instance.$fullScreenButton.remove();
+        }
+        break;
+
+      case 'H5P.InteractiveVideo':
+        instance.on('controls', function () {
+          if (instance.controls.$fullscreen) {
+            instance.controls.$fullscreen.remove();
+          }
+        });
+        break;
+    }
   };
 
   return Column;
