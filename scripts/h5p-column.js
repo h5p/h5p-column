@@ -11,6 +11,12 @@ H5P.Column = (function () {
   function Column(params, id, data) {
     var self = this;
 
+    // Add defaults
+    params = params || {};
+    if (params.useSeparator === undefined) {
+      params.useSeparator = true;
+    }
+
     // Column wrapper element
     var wrapper;
 
@@ -25,6 +31,9 @@ H5P.Column = (function () {
 
     // Keep track of result for each task
     var tasksResultEvent = [];
+
+    // Keep track of last content's margin state
+    var previousHasMargin;
 
     /**
      * Calculate score and trigger completed event.
@@ -136,8 +145,50 @@ H5P.Column = (function () {
       if (data.previousState && data.previousState.instances[index]) {
         contentData.previousState = data.previousState.instances[index];
       }
-
+      
       return contentData;
+    };
+
+    /**
+     * Adds separator before the next content.
+     *
+     * @private
+     * @param {string} libraryName Name of the next content type
+     */
+    var addSeparator = function (libraryName) {
+      // Determine separator spacing
+      var libraryName = ;
+      var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
+
+      // Only add if previous content exists
+      if (previousHasMargin !== undefined) {
+
+        // Create separator element
+        var separator = document.createElement('div');
+        separator.classList.add('h5p-column-separator');
+
+        // If no margins, check for top margin only
+        if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
+          if (!previousHasMargin) {
+            // Add space both before and after separator
+            separator.classList.add('h5p-column-space-before-n-after');
+          }
+          else {
+            // Only add space before separator
+            separator.classList.add('h5p-column-space-after');
+          }
+        }
+        else if (!previousHasMargin) {
+          // Only add space after separator
+          separator.classList.add('h5p-column-space-before');
+        }
+
+        // Insert into DOM
+        wrapper.appendChild(separator);
+      }
+
+      // Keep track of spacing for next separator
+      previousHasMargin = thisHasMargin || (hasBottomMargins.indexOf(libraryName) !== -1);
     };
 
     /**
@@ -150,8 +201,15 @@ H5P.Column = (function () {
       // Create wrapper
       wrapper = document.createElement('div');
 
-      // Add content
+      // Go though all contents
       for (var i = 0; i < params.content.length; i++) {
+
+        if (params.useSeparator) {
+          // Add separator between contents
+          addSeparator(params.content[i].library.split(' ')[0]);
+        }
+
+        // Add content
         addRunnable(params.content[i], grabContentData(i));
       }
     };
@@ -252,18 +310,17 @@ H5P.Column = (function () {
    */
   var isTasks = [
     'H5P.ImageHotspotQuestion',
-    "H5P.Blanks",
-    "H5P.SingleChoiceSet",
-    "H5P.MultiChoice",
-    "H5P.DragQuestion",
-    "H5P.Summary",
-    "H5P.DragText",
-    "H5P.MarkTheWords",
-    "H5P.MemoryGame",
-    "H5P.Flashcards",
-    "H5P.QuestionSet",
-    "H5P.InteractiveVideo",
-    "H5P.CoursePresentation"
+    'H5P.Blanks',
+    'H5P.SingleChoiceSet',
+    'H5P.MultiChoice',
+    'H5P.DragQuestion',
+    'H5P.Summary',
+    'H5P.DragText',
+    'H5P.MarkTheWords',
+    'H5P.MemoryGame',
+    'H5P.QuestionSet',
+    'H5P.InteractiveVideo',
+    'H5P.CoursePresentation'
   ];
 
   /**
@@ -283,6 +340,41 @@ H5P.Column = (function () {
 
     return false;
   };
+
+  /**
+   * Definition of which content type have margins
+   */
+  var hasMargins = [
+    'H5P.AdvancedText',
+    'H5P.Link',
+    'H5P.Accordion',
+    'H5P.Table',
+    'H5P.GuessTheAnswer',
+    'H5P.Blanks',
+    'H5P.MultiChoice',
+    'H5P.DragQuestion',
+    'H5P.Summary',
+    'H5P.DragText',
+    'H5P.MarkTheWords',
+    'H5P.MemoryGame',
+    'H5P.Dialogcards',
+    'H5P.QuestionSet'
+  ];
+
+  /**
+   * Definition of which content type have top margins
+   */
+  var hasTopMargins = [
+    'H5P.SingleChoiceSet',
+    'H5P.ImageHotspotQuestion'
+  ];
+
+  /**
+   * Definition of which content type have bottom margins
+   */
+  var hasBottomMargins = [
+    'H5P.CoursePresentation'
+  ];
 
   /**
    * Remove custom fullscreen buttons from sub content.

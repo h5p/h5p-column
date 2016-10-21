@@ -1,3 +1,24 @@
 .h5p-column-content {
   position: relative;
 }
+.h5p-column-content.h5p-table,
+.h5p-column-content.h5p-advanced-text,
+.h5p-column-content.h5p-link {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.h5p-column-separator {
+  border-bottom: 2px solid #eee;
+}
+.h5p-column-space-before-n-after {
+  margin: 1em 0;
+}
+.h5p-column-space-before {
+  margin: 1em 0 0;
+}
+.h5p-column-space-after {
+  margin: 0 0 1em;
+}
