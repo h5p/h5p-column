@@ -145,7 +145,7 @@ H5P.Column = (function () {
       if (data.previousState && data.previousState.instances[index]) {
         contentData.previousState = data.previousState.instances[index];
       }
-      
+
       return contentData;
     };
 
@@ -157,7 +157,6 @@ H5P.Column = (function () {
      */
     var addSeparator = function (libraryName) {
       // Determine separator spacing
-      var libraryName = ;
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
 
       // Only add if previous content exists
