@@ -17,7 +17,7 @@ H5P.Column = (function () {
     // H5P content in the column
     var instances = [];
 
-    // Number of tasks amoung instances
+    // Number of tasks among instances
     var numTasks = 0;
 
     // Number of tasks that has been completed
@@ -59,7 +59,7 @@ H5P.Column = (function () {
         }
 
         if (tasksResultEvent[taskIndex] === undefined) {
-          // Update number of compelted tasks
+          // Update number of completed tasks
           numTasksCompleted++;
         }
 
@@ -184,9 +184,9 @@ H5P.Column = (function () {
         state.instances = [];
       }
 
-      // Grabv the current state for each instance
+      // Grab the current state for each instance
       for (var i = 0; i < instances.length; i++) {
-        var instance = instances[i]
+        var instance = instances[i];
 
         if (instance.getCurrentState instanceof Function ||
             typeof instance.getCurrentState === 'function') {
@@ -201,8 +201,6 @@ H5P.Column = (function () {
 
     // Resize children to fit inside parent
     bubbleDown(self, 'resize', instances);
-
-    self.on('xAPI', function (event) { console.log(event.getVerb(), event.data.statement); });
     self.setActivityStarted();
   }
 
@@ -224,7 +222,7 @@ H5P.Column = (function () {
         targets[i].trigger(eventName, event);
       }
     });
-  };
+  }
 
   /**
    * Makes it easy to bubble events from child to parent
@@ -245,7 +243,7 @@ H5P.Column = (function () {
       // Reset
       target.bubblingUpwards = false;
     });
-  };
+  }
 
   /**
    * Definition of which content types are tasks
@@ -282,7 +280,7 @@ H5P.Column = (function () {
     }
 
     return false;
-  };
+  }
 
   /**
    * Remove custom fullscreen buttons from sub content.
@@ -306,7 +304,7 @@ H5P.Column = (function () {
         });
         break;
     }
-  };
+  }
 
   return Column;
 })();

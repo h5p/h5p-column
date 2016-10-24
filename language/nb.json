@@ -1,0 +1,11 @@
+{
+  "semantics": [
+    {
+      "label": "Liste av tilgjengelige innholdstyper",
+      "entity": "innholdstype",
+      "field": {
+        "label": "Innholdstype"
+      }
+    }
+  ]
+}
