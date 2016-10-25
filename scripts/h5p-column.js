@@ -357,7 +357,8 @@ H5P.Column = (function () {
     'H5P.MarkTheWords',
     'H5P.MemoryGame',
     'H5P.Dialogcards',
-    'H5P.QuestionSet'
+    'H5P.QuestionSet',
+    'H5P.DocumentationTool'
   ];
 
   /**
