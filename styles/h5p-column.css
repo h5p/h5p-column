@@ -64,3 +64,16 @@
   border-left: 1px solid #eeeeee;
   border-right: 1px solid #eeeeee;
 }
+
+/* Memory Game */
+.h5p-no-frame > .h5p-column > div > .h5p-memory-game .h5p-status {
+  padding-left: 0;
+  padding-right: 0;
+}
+.h5p-no-frame > .h5p-column > div > .h5p-memory-game .h5p-feedback {
+  margin: 0;
+}
+.h5p-no-frame > .h5p-column > div > .h5p-memory-game .h5p-memory-card {
+  margin-left: 0;
+  margin-right: 2em;
+}
