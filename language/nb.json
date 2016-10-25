@@ -1,0 +1,14 @@
+{
+  "semantics": [
+    {
+      "englishLabel": "List of Column Content",
+      "label": "Liste over kolonneinnhold",
+      "englishEntity": "content",
+      "entity": "innhold",
+      "field": {
+        "englishLabel": "Content",
+        "label": "Innhold"
+      }
+    }
+  ]
+}
