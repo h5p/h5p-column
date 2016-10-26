@@ -9,6 +9,9 @@
   padding-left: 1em;
   padding-right: 1em;
 }
+.h5p-column-content.h5p-video > video {
+  width: 100%;
+}
 
 .h5p-column-separator {
   border-bottom: 2px solid #eee;
