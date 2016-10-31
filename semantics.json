@@ -7,42 +7,48 @@
     "entity": "content",
     "field": {
       "name": "content",
-      "type": "library",
-      "label": "Content",
-      "options": [
-        "H5P.AdvancedText 1.1",
-        "H5P.Link 1.2",
-        "H5P.Image 1.0",
-        "H5P.Video 1.3",
-        "H5P.Audio 1.2",
-        "H5P.Collage 0.2",
-        "H5P.Accordion 1.0",
-        "H5P.Table 1.1",
-        "H5P.ImageHotspots 1.4",
-        "H5P.ImageHotspotQuestion 1.3",
-        "H5P.Blanks 1.7",
-        "H5P.SingleChoiceSet 1.5",
-        "H5P.MultiChoice 1.8",
-        "H5P.DragQuestion 1.7",
-        "H5P.Summary 1.5",
-        "H5P.DragText 1.5",
-        "H5P.MarkTheWords 1.6",
-        "H5P.MemoryGame 1.1",
-        "H5P.QuestionSet 1.9",
-        "H5P.InteractiveVideo 1.11",
-        "H5P.CoursePresentation 1.13",
-        "H5P.Timeline 1.1",
-        "H5P.DocumentationTool 1.3",
-        "H5P.TwitterUserFeed 1.0",
-        "H5P.AppearIn 1.0",
-        "H5P.IFrameEmbed 1.0"
+      "type": "group",
+      "fields": [
+        {
+          "name": "content",
+          "type": "library",
+          "label": "Content",
+          "options": [
+            "H5P.AdvancedText 1.1",
+            "H5P.Link 1.2",
+            "H5P.Image 1.0",
+            "H5P.Video 1.3",
+            "H5P.Audio 1.2",
+            "H5P.Collage 0.2",
+            "H5P.Accordion 1.0",
+            "H5P.Table 1.1",
+            "H5P.ImageHotspots 1.4",
+            "H5P.ImageHotspotQuestion 1.3",
+            "H5P.Blanks 1.7",
+            "H5P.SingleChoiceSet 1.5",
+            "H5P.MultiChoice 1.8",
+            "H5P.DragQuestion 1.7",
+            "H5P.Summary 1.5",
+            "H5P.DragText 1.5",
+            "H5P.MarkTheWords 1.6",
+            "H5P.MemoryGame 1.1",
+            "H5P.QuestionSet 1.9",
+            "H5P.InteractiveVideo 1.11",
+            "H5P.CoursePresentation 1.13",
+            "H5P.Timeline 1.1",
+            "H5P.DocumentationTool 1.3",
+            "H5P.TwitterUserFeed 1.0",
+            "H5P.AppearIn 1.0",
+            "H5P.IFrameEmbed 1.0"
+          ]
+        },
+        {
+          "name": "useSeparator",
+          "type": "boolean",
+          "label": "Separate content with a horizontal ruler",
+          "default": true
+        }
       ]
     }
-  },
-  {
-    "name": "useSeparator",
-    "type": "boolean",
-    "label": "Separate content with a horizontal ruler",
-    "default": true
   }
 ]

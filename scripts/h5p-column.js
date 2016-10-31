@@ -203,13 +203,13 @@ H5P.Column = (function () {
       // Go though all contents
       for (var i = 0; i < params.content.length; i++) {
 
-        if (params.useSeparator) {
+        if (params.useSeparator && params.content[i].useSeparator) {
           // Add separator between contents
-          addSeparator(params.content[i].library.split(' ')[0]);
+          addSeparator(params.content[i].content.library.split(' ')[0]);
         }
 
         // Add content
-        addRunnable(params.content[i], grabContentData(i));
+        addRunnable(params.content[i].content, grabContentData(i));
       }
     };
 
