@@ -126,7 +126,7 @@ H5P.Column = (function () {
 
       if (library === 'H5P.Image') {
         // Resize when images are loaded
-        
+
         instance.on('loaded', function () {
           self.trigger('resize');
         });
@@ -250,9 +250,9 @@ H5P.Column = (function () {
         state.instances = [];
       }
 
-      // Grabv the current state for each instance
+      // Grab the current state for each instance
       for (var i = 0; i < instances.length; i++) {
-        var instance = instances[i]
+        var instance = instances[i];
 
         if (instance.getCurrentState instanceof Function ||
             typeof instance.getCurrentState === 'function') {
