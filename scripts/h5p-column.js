@@ -268,7 +268,6 @@ H5P.Column = (function () {
     // Resize children to fit inside parent
     bubbleDown(self, 'resize', instances);
 
-    self.on('xAPI', function (event) { console.log(event.getVerb(), event.data.statement); });
     self.setActivityStarted();
   }
 
