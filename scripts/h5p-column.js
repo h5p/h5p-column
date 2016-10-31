@@ -101,7 +101,8 @@ H5P.Column = (function () {
       container.classList.add('h5p-column-content');
 
       // Content overrides
-      if (content.library.split(' ')[0] === 'H5P.Video') {
+      var library = content.library.split(' ')[0];
+      if (library === 'H5P.Video') {
         // Prevent video from growing endlessly since height is unlimited.
         content.params.visuals.fit = false;
       }
@@ -121,6 +122,14 @@ H5P.Column = (function () {
 
         instance.on('xAPI', trackScoring(numTasks));
         numTasks++;
+      }
+
+      if (library === 'H5P.Image') {
+        // Resize when images are loaded
+        
+        instance.on('loaded', function () {
+          self.trigger('resize');
+        });
       }
 
       // Keep track of all instances
