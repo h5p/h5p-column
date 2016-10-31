@@ -289,7 +289,7 @@ H5P.Column = (function () {
         targets[i].trigger(eventName, event);
       }
     });
-  };
+  }
 
   /**
    * Makes it easy to bubble events from child to parent
@@ -310,7 +310,7 @@ H5P.Column = (function () {
       // Reset
       target.bubblingUpwards = false;
     });
-  };
+  }
 
   /**
    * Definition of which content types are tasks
@@ -346,7 +346,7 @@ H5P.Column = (function () {
     }
 
     return false;
-  };
+  }
 
   /**
    * Definition of which content type have margins
@@ -406,7 +406,7 @@ H5P.Column = (function () {
         });
         break;
     }
-  };
+  }
 
   return Column;
 })();
