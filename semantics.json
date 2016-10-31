@@ -38,5 +38,11 @@
         "H5P.IFrameEmbed 1.0"
       ]
     }
+  },
+  {
+    "name": "useSeparator",
+    "type": "boolean",
+    "label": "Separate content with a horizontal ruler",
+    "default": true
   }
 ]
