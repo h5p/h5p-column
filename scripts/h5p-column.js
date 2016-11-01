@@ -165,7 +165,7 @@ H5P.Column = (function () {
      * @param {string} libraryName Name of the next content type
      * @param {string} useSeparator
      */
-    var addSeparator = function (libraryName, useSeparator) {
+    var addSeparator = function (libraryName, useSeparator) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
 
