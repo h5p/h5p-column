@@ -44,9 +44,23 @@
         },
         {
           "name": "useSeparator",
-          "type": "boolean",
+          "type": "select",
           "label": "Separate content with a horizontal ruler",
-          "default": true
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatic (default)"
+            },
+            {
+              "value": "disabled",
+              "label": "Never use ruler above"
+            },
+            {
+              "value": "enabled",
+              "label": "Always use ruler above"
+            }
+          ]
         }
       ]
     }

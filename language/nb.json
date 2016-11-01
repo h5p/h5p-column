@@ -6,8 +6,30 @@
       "englishEntity": "content",
       "entity": "innhold",
       "field": {
-        "englishLabel": "Content",
-        "label": "Innhold"
+        "fields": [
+          {
+            "englishLabel": "Content",
+            "label": "Innhold"
+          },
+          {
+            "englishLabel": "Separate content with a horizontal ruler",
+            "label": "Del innhold med en horizontal linje",
+            "options": [
+              {
+                "englishLabel": "Automatic (default)",
+                "label": "Automatisk (standard)"
+              },
+              {
+                "englishLabel": "Never use ruler above",
+                "label": "Aldri bruk linje over"
+              },
+              {
+                "englishLabel": "Always use ruler above",
+                "label": "Alltid bruk linje over"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

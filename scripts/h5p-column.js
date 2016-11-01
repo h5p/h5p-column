@@ -13,8 +13,8 @@ H5P.Column = (function () {
 
     // Add defaults
     params = params || {};
-    if (params.useSeparator === undefined) {
-      params.useSeparator = true;
+    if (params.useSeparators === undefined) {
+      params.useSeparators = true;
     }
 
     // Column wrapper element
@@ -163,8 +163,9 @@ H5P.Column = (function () {
      *
      * @private
      * @param {string} libraryName Name of the next content type
+     * @param {string} useSeparator
      */
-    var addSeparator = function (libraryName) {
+    var addSeparator = function (libraryName, useSeparator) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
 
@@ -173,22 +174,58 @@ H5P.Column = (function () {
 
         // Create separator element
         var separator = document.createElement('div');
-        separator.classList.add('h5p-column-separator');
+        //separator.classList.add('h5p-column-ruler');
 
         // If no margins, check for top margin only
         if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
           if (!previousHasMargin) {
-            // Add space both before and after separator
-            separator.classList.add('h5p-column-space-before-n-after');
+            // None of them have margin
+
+            // Only add separator if forced
+            if (useSeparator === 'enabled') {
+              // Add ruler
+              separator.classList.add('h5p-column-ruler');
+
+              // Add space both before and after the ruler
+              separator.classList.add('h5p-column-space-before-n-after');
+            }
+            else {
+              // Default is to separte using a single space, no ruler
+              separator.classList.add('h5p-column-space-before');
+            }
           }
           else {
-            // Only add space before separator
-            separator.classList.add('h5p-column-space-after');
+            // We don't have any margin but the previous content does
+
+            // Only add separator if forced
+            if (useSeparator === 'enabled') {
+              // Add ruler
+              separator.classList.add('h5p-column-ruler');
+
+              // Add space after the ruler
+              separator.classList.add('h5p-column-space-after');
+            }
           }
         }
         else if (!previousHasMargin) {
-          // Only add space after separator
-          separator.classList.add('h5p-column-space-before');
+          // We have margin but not the previous content doesn't
+
+          // Only add separator if forced
+          if (useSeparator === 'enabled') {
+            // Add ruler
+            separator.classList.add('h5p-column-ruler');
+
+            // Add space after the ruler
+            separator.classList.add('h5p-column-space-before');
+          }
+        }
+        else {
+          // Both already have margin
+
+          if (useSeparator !== 'disabled') {
+            // Default is to add ruler unless its disabled
+            separator.classList.add('h5p-column-ruler');
+          }
         }
 
         // Insert into DOM
@@ -211,14 +248,16 @@ H5P.Column = (function () {
 
       // Go though all contents
       for (var i = 0; i < params.content.length; i++) {
+        var content = params.content[i];
 
-        if (params.useSeparator && params.content[i].useSeparator) {
+        if (params.useSeparators) { // (check for global override)
+
           // Add separator between contents
-          addSeparator(params.content[i].content.library.split(' ')[0]);
+          addSeparator(content.content.library.split(' ')[0], content.useSeparator);
         }
 
         // Add content
-        addRunnable(params.content[i].content, grabContentData(i));
+        addRunnable(content.content, grabContentData(i));
       }
     };
 
