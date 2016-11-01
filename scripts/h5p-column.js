@@ -402,6 +402,7 @@ H5P.Column = (function () {
     'H5P.Summary',
     'H5P.DragText',
     'H5P.MarkTheWords',
+    'H5P.ImageHotspotQuestion',
     'H5P.MemoryGame',
     'H5P.Dialogcards',
     'H5P.QuestionSet',
@@ -412,8 +413,7 @@ H5P.Column = (function () {
    * Definition of which content type have top margins
    */
   var hasTopMargins = [
-    'H5P.SingleChoiceSet',
-    'H5P.ImageHotspotQuestion'
+    'H5P.SingleChoiceSet'
   ];
 
   /**
