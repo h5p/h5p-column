@@ -1,10 +1,35 @@
 {
   "semantics": [
     {
-      "label": "Liste av tilgjengelige innholdstyper",
-      "entity": "innholdstype",
+      "englishLabel": "List of Column Content",
+      "label": "Liste med kolonneinnhold",
+      "englishEntity": "content",
+      "entity": "innhold",
       "field": {
-        "label": "Innholdstype"
+        "fields": [
+          {
+            "englishLabel": "Content",
+            "label": "Innhold"
+          },
+          {
+            "englishLabel": "Separate content with a horizontal ruler",
+            "label": "Del innhold med en horisontal linje",
+            "options": [
+              {
+                "englishLabel": "Automatic (default)",
+                "label": "Automatisk (standard)"
+              },
+              {
+                "englishLabel": "Never use ruler above",
+                "label": "Aldri bruk linje over"
+              },
+              {
+                "englishLabel": "Always use ruler above",
+                "label": "Alltid bruk linje over"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

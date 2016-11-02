@@ -11,6 +11,12 @@ H5P.Column = (function () {
   function Column(params, id, data) {
     var self = this;
 
+    // Add defaults
+    params = params || {};
+    if (params.useSeparators === undefined) {
+      params.useSeparators = true;
+    }
+
     // Column wrapper element
     var wrapper;
 
@@ -25,6 +31,9 @@ H5P.Column = (function () {
 
     // Keep track of result for each task
     var tasksResultEvent = [];
+
+    // Keep track of last content's margin state
+    var previousHasMargin;
 
     /**
      * Calculate score and trigger completed event.
@@ -92,7 +101,8 @@ H5P.Column = (function () {
       container.classList.add('h5p-column-content');
 
       // Content overrides
-      if (content.library.split(' ')[0] === 'H5P.Video') {
+      var library = content.library.split(' ')[0];
+      if (library === 'H5P.Video') {
         // Prevent video from growing endlessly since height is unlimited.
         content.params.visuals.fit = false;
       }
@@ -112,6 +122,14 @@ H5P.Column = (function () {
 
         instance.on('xAPI', trackScoring(numTasks));
         numTasks++;
+      }
+
+      if (library === 'H5P.Image') {
+        // Resize when images are loaded
+
+        instance.on('loaded', function () {
+          self.trigger('resize');
+        });
       }
 
       // Keep track of all instances
@@ -141,6 +159,84 @@ H5P.Column = (function () {
     };
 
     /**
+     * Adds separator before the next content.
+     *
+     * @private
+     * @param {string} libraryName Name of the next content type
+     * @param {string} useSeparator
+     */
+    var addSeparator = function (libraryName, useSeparator) {
+      // Determine separator spacing
+      var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
+
+      // Only add if previous content exists
+      if (previousHasMargin !== undefined) {
+
+        // Create separator element
+        var separator = document.createElement('div');
+        //separator.classList.add('h5p-column-ruler');
+
+        // If no margins, check for top margin only
+        if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
+          if (!previousHasMargin) {
+            // None of them have margin
+
+            // Only add separator if forced
+            if (useSeparator === 'enabled') {
+              // Add ruler
+              separator.classList.add('h5p-column-ruler');
+
+              // Add space both before and after the ruler
+              separator.classList.add('h5p-column-space-before-n-after');
+            }
+            else {
+              // Default is to separte using a single space, no ruler
+              separator.classList.add('h5p-column-space-before');
+            }
+          }
+          else {
+            // We don't have any margin but the previous content does
+
+            // Only add separator if forced
+            if (useSeparator === 'enabled') {
+              // Add ruler
+              separator.classList.add('h5p-column-ruler');
+
+              // Add space after the ruler
+              separator.classList.add('h5p-column-space-after');
+            }
+          }
+        }
+        else if (!previousHasMargin) {
+          // We have margin but not the previous content doesn't
+
+          // Only add separator if forced
+          if (useSeparator === 'enabled') {
+            // Add ruler
+            separator.classList.add('h5p-column-ruler');
+
+            // Add space after the ruler
+            separator.classList.add('h5p-column-space-before');
+          }
+        }
+        else {
+          // Both already have margin
+
+          if (useSeparator !== 'disabled') {
+            // Default is to add ruler unless its disabled
+            separator.classList.add('h5p-column-ruler');
+          }
+        }
+
+        // Insert into DOM
+        wrapper.appendChild(separator);
+      }
+
+      // Keep track of spacing for next separator
+      previousHasMargin = thisHasMargin || (hasBottomMargins.indexOf(libraryName) !== -1);
+    };
+
+    /**
      * Creates a wrapper and the column content the first time the column
      * is attached to the DOM.
      *
@@ -150,9 +246,18 @@ H5P.Column = (function () {
       // Create wrapper
       wrapper = document.createElement('div');
 
-      // Add content
+      // Go though all contents
       for (var i = 0; i < params.content.length; i++) {
-        addRunnable(params.content[i], grabContentData(i));
+        var content = params.content[i];
+
+        if (params.useSeparators) { // (check for global override)
+
+          // Add separator between contents
+          addSeparator(content.content.library.split(' ')[0], content.useSeparator);
+        }
+
+        // Add content
+        addRunnable(content.content, grabContentData(i));
       }
     };
 
@@ -201,6 +306,7 @@ H5P.Column = (function () {
 
     // Resize children to fit inside parent
     bubbleDown(self, 'resize', instances);
+
     self.setActivityStarted();
   }
 
@@ -250,18 +356,18 @@ H5P.Column = (function () {
    */
   var isTasks = [
     'H5P.ImageHotspotQuestion',
-    "H5P.Blanks",
-    "H5P.SingleChoiceSet",
-    "H5P.MultiChoice",
-    "H5P.DragQuestion",
-    "H5P.Summary",
-    "H5P.DragText",
-    "H5P.MarkTheWords",
-    "H5P.MemoryGame",
-    "H5P.Flashcards",
-    "H5P.QuestionSet",
-    "H5P.InteractiveVideo",
-    "H5P.CoursePresentation"
+    'H5P.Blanks',
+    'H5P.SingleChoiceSet',
+    'H5P.MultiChoice',
+    'H5P.TrueFalse',
+    'H5P.DragQuestion',
+    'H5P.Summary',
+    'H5P.DragText',
+    'H5P.MarkTheWords',
+    'H5P.MemoryGame',
+    'H5P.QuestionSet',
+    'H5P.InteractiveVideo',
+    'H5P.CoursePresentation'
   ];
 
   /**
@@ -281,6 +387,43 @@ H5P.Column = (function () {
 
     return false;
   }
+
+  /**
+   * Definition of which content type have margins
+   */
+  var hasMargins = [
+    'H5P.AdvancedText',
+    'H5P.Link',
+    'H5P.Accordion',
+    'H5P.Table',
+    'H5P.GuessTheAnswer',
+    'H5P.Blanks',
+    'H5P.MultiChoice',
+    'H5P.TrueFalse',
+    'H5P.DragQuestion',
+    'H5P.Summary',
+    'H5P.DragText',
+    'H5P.MarkTheWords',
+    'H5P.ImageHotspotQuestion',
+    'H5P.MemoryGame',
+    'H5P.Dialogcards',
+    'H5P.QuestionSet',
+    'H5P.DocumentationTool'
+  ];
+
+  /**
+   * Definition of which content type have top margins
+   */
+  var hasTopMargins = [
+    'H5P.SingleChoiceSet'
+  ];
+
+  /**
+   * Definition of which content type have bottom margins
+   */
+  var hasBottomMargins = [
+    'H5P.CoursePresentation'
+  ];
 
   /**
    * Remove custom fullscreen buttons from sub content.
