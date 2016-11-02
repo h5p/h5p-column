@@ -2,7 +2,7 @@
   "semantics": [
     {
       "englishLabel": "List of Column Content",
-      "label": "Liste over kolonneinnhold",
+      "label": "Liste med kolonneinnhold",
       "englishEntity": "content",
       "entity": "innhold",
       "field": {
@@ -13,7 +13,7 @@
           },
           {
             "englishLabel": "Separate content with a horizontal ruler",
-            "label": "Del innhold med en horizontal linje",
+            "label": "Del innhold med en horisontal linje",
             "options": [
               {
                 "englishLabel": "Automatic (default)",
