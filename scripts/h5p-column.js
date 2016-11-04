@@ -151,7 +151,7 @@ H5P.Column = (function () {
         parent: self
       };
 
-      if (data.previousState && data.previousState.instances[index]) {
+      if (data.previousState && data.previousState.instances && data.previousState.instances[index]) {
         contentData.previousState = data.previousState.instances[index];
       }
 
