@@ -250,6 +250,12 @@ H5P.Column = (function () {
       for (var i = 0; i < params.content.length; i++) {
         var content = params.content[i];
 
+        // In case the author has created an element without selecting any
+        // library
+        if (content.content === undefined) {
+          continue;
+        }
+
         if (params.useSeparators) { // (check for global override)
 
           // Add separator between contents
