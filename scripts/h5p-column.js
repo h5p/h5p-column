@@ -304,6 +304,67 @@ H5P.Column = (function () {
       return state;
     };
 
+    /**
+     * Get the instances contained within the column 
+     *
+     * @returns {array} H5P instances
+     */
+    self.getSubContentTypes = function() {
+      return instances;
+    }
+
+    /**
+     * Get xAPI data.
+     * Contract used by report rendering engine.
+     *
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
+     */
+    self.getXAPIData = function(){
+      var xAPIEvent = this.createXAPIEventTemplate('answered');
+      addQuestionToXAPI(xAPIEvent); 
+      var childrenData = getXAPIDataFromChildren(self);
+      return {
+        statement: xAPIEvent.data.statement,
+        children: childrenData
+      }
+    };
+
+    /**
+     * Add the question itself to the definition part of an xAPIEvent
+     */
+    var addQuestionToXAPI = function(xAPIEvent) {
+      var definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
+      H5P.jQuery.extend(definition, getxAPIDefinition());
+    };
+  
+    /**
+     * Generate xAPI object definition used in xAPI statements.
+     * @return {Object}
+     */
+    var getxAPIDefinition = function () {
+      var definition = {};
+  
+      definition.interactionType = 'compound';
+      definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
+      definition.description = {
+        'en-US': ''  
+      };
+  
+      return definition;
+    };
+
+    /**
+     * Get xAPI data from sub content types
+     *
+     * @param {Object} metaContentType
+     * @returns {array}  
+     */
+    var getXAPIDataFromChildren = function(metaContentType) {
+      return metaContentType.getSubContentTypes().map(function(subContentType) {
+        return subContentType.getXAPIData();
+      });
+    }
+
     // Resize children to fit inside parent
     bubbleDown(self, 'resize', instances);
 
