@@ -305,15 +305,6 @@ H5P.Column = (function () {
     };
 
     /**
-     * Get the instances contained within the column 
-     *
-     * @returns {array} H5P instances
-     */
-    self.getSubContentTypes = function() {
-      return instances;
-    }
-
-    /**
      * Get xAPI data.
      * Contract used by report rendering engine.
      *
@@ -322,7 +313,7 @@ H5P.Column = (function () {
     self.getXAPIData = function(){
       var xAPIEvent = this.createXAPIEventTemplate('answered');
       addQuestionToXAPI(xAPIEvent); 
-      var childrenData = getXAPIDataFromChildren(self);
+      var childrenData = getXAPIDataFromChildren(instances);
       return {
         statement: xAPIEvent.data.statement,
         children: childrenData
@@ -359,9 +350,9 @@ H5P.Column = (function () {
      * @param {Object} metaContentType
      * @returns {array}  
      */
-    var getXAPIDataFromChildren = function(metaContentType) {
-      return metaContentType.getSubContentTypes().map(function(subContentType) {
-        return subContentType.getXAPIData();
+    var getXAPIDataFromChildren = function(children) {
+      return children.map(function(child) {
+        return child.getXAPIData();
       });
     }
 
