@@ -311,13 +311,42 @@ H5P.Column = (function () {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
      */
     self.getXAPIData = function(){
-      var xAPIEvent = this.createXAPIEventTemplate('answered');
-      addQuestionToXAPI(xAPIEvent); 
-      var childrenData = getXAPIDataFromChildren(instances);
+      var xAPIEvent = self.createXAPIEventTemplate('answered');
+      addQuestionToXAPI(xAPIEvent);
+      xAPIEvent.setScoredResult(self.getScore(),
+        self.getMaxScore(),
+        self,
+        true,
+        self.getScore() === self.getMaxScore()
+      );
       return {
         statement: xAPIEvent.data.statement,
-        children: childrenData
+        children: getXAPIDataFromChildren(instances)
       }
+    };
+
+    /**
+     * Get score for all children
+     * Contract used for getting the complete score of task.
+     *
+     * @return {number} Score for questions
+     */
+    self.getScore = function () {
+      return instances.reduce(function (prev, instance) {
+        return prev + (instance.getScore ? instance.getScore() : 0);
+      }, 0);
+    };
+
+    /**
+     * Get maximum score possible for all children instances
+     * Contract.
+     *
+     * @return {number} Maximum score for questions
+     */
+    self.getMaxScore = function () {
+      return instances.reduce(function (prev, instance) {
+        return prev + (instance.getMaxScore ? instance.getMaxScore() : 0);
+      }, 0);
     };
 
     /**
@@ -327,20 +356,20 @@ H5P.Column = (function () {
       var definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
       H5P.jQuery.extend(definition, getxAPIDefinition());
     };
-  
+
     /**
      * Generate xAPI object definition used in xAPI statements.
      * @return {Object}
      */
     var getxAPIDefinition = function () {
       var definition = {};
-  
+
       definition.interactionType = 'compound';
       definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
       definition.description = {
-        'en-US': ''  
+        'en-US': ''
       };
-  
+
       return definition;
     };
 
@@ -348,7 +377,7 @@ H5P.Column = (function () {
      * Get xAPI data from sub content types
      *
      * @param {Object} metaContentType
-     * @returns {array}  
+     * @returns {array}
      */
     var getXAPIDataFromChildren = function(children) {
       return children.map(function(child) {
