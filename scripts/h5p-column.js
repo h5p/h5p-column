@@ -376,14 +376,14 @@ H5P.Column = (function () {
     /**
      * Get xAPI data from sub content types
      *
-     * @param {Object} metaContentType
-     * @returns {array}
+     * @param {Array} of H5P instances 
+     * @returns {Array} of xAPI data objects used to build a report
      */
     var getXAPIDataFromChildren = function(children) {
       return children.map(function(child) {
         return child.getXAPIData();
       });
-    }
+    };
 
     // Resize children to fit inside parent
     bubbleDown(self, 'resize', instances);
