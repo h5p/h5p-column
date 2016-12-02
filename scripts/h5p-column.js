@@ -250,6 +250,12 @@ H5P.Column = (function () {
       for (var i = 0; i < params.content.length; i++) {
         var content = params.content[i];
 
+        // In case the author has created an element without selecting any
+        // library
+        if (content.content === undefined) {
+          continue;
+        }
+
         if (params.useSeparators) { // (check for global override)
 
           // Add separator between contents
@@ -302,6 +308,87 @@ H5P.Column = (function () {
 
       // Done
       return state;
+    };
+
+    /**
+     * Get xAPI data.
+     * Contract used by report rendering engine.
+     *
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
+     */
+    self.getXAPIData = function(){
+      var xAPIEvent = self.createXAPIEventTemplate('answered');
+      addQuestionToXAPI(xAPIEvent);
+      xAPIEvent.setScoredResult(self.getScore(),
+        self.getMaxScore(),
+        self,
+        true,
+        self.getScore() === self.getMaxScore()
+      );
+      return {
+        statement: xAPIEvent.data.statement,
+        children: getXAPIDataFromChildren(instances)
+      }
+    };
+
+    /**
+     * Get score for all children
+     * Contract used for getting the complete score of task.
+     *
+     * @return {number} Score for questions
+     */
+    self.getScore = function () {
+      return instances.reduce(function (prev, instance) {
+        return prev + (instance.getScore ? instance.getScore() : 0);
+      }, 0);
+    };
+
+    /**
+     * Get maximum score possible for all children instances
+     * Contract.
+     *
+     * @return {number} Maximum score for questions
+     */
+    self.getMaxScore = function () {
+      return instances.reduce(function (prev, instance) {
+        return prev + (instance.getMaxScore ? instance.getMaxScore() : 0);
+      }, 0);
+    };
+
+    /**
+     * Add the question itself to the definition part of an xAPIEvent
+     */
+    var addQuestionToXAPI = function(xAPIEvent) {
+      var definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
+      H5P.jQuery.extend(definition, getxAPIDefinition());
+    };
+
+    /**
+     * Generate xAPI object definition used in xAPI statements.
+     * @return {Object}
+     */
+    var getxAPIDefinition = function () {
+      var definition = {};
+
+      definition.interactionType = 'compound';
+      definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
+      definition.description = {
+        'en-US': ''
+      };
+
+      return definition;
+    };
+
+    /**
+     * Get xAPI data from sub content types
+     *
+     * @param {Array} of H5P instances 
+     * @returns {Array} of xAPI data objects used to build a report
+     */
+    var getXAPIDataFromChildren = function(children) {
+      return children.map(function(child) {
+        return child.getXAPIData();
+      });
     };
 
     // Resize children to fit inside parent
