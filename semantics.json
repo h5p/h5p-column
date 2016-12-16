@@ -2,6 +2,7 @@
   {
     "name": "content",
     "label": "List of Column Content",
+    "importance": "high",
     "type": "list",
     "min": 1,
     "entity": "content",
@@ -12,6 +13,7 @@
         {
           "name": "content",
           "type": "library",
+          "importance": "high",
           "label": "Content",
           "options": [
             "H5P.Accordion 1.0",
@@ -46,6 +48,7 @@
         {
           "name": "useSeparator",
           "type": "select",
+          "importance": "low",
           "label": "Separate content with a horizontal ruler",
           "default": "auto",
           "options": [
