@@ -82,7 +82,10 @@ H5P.Column = (function () {
 
         // Check to see if we're done
         if (numTasksCompleted === numTasks) {
-          completed(); // Done
+          // Run this after the current event is sent
+          setTimeout(function () {
+            completed(); // Done
+          }, 0)
         }
       };
     };
@@ -382,7 +385,7 @@ H5P.Column = (function () {
     /**
      * Get xAPI data from sub content types
      *
-     * @param {Array} of H5P instances 
+     * @param {Array} of H5P instances
      * @returns {Array} of xAPI data objects used to build a report
      */
     var getXAPIDataFromChildren = function(children) {
