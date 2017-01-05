@@ -63,7 +63,7 @@ H5P.Column = (function () {
      */
     var trackScoring = function (taskIndex) {
       return function (event) {
-        if (event.getScore() === null) {
+        if (!event.isFromChild() || event.getScore() === null) {
           return; // Skip, not relevant
         }
 
