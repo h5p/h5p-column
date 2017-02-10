@@ -390,7 +390,9 @@ H5P.Column = (function () {
      */
     var getXAPIDataFromChildren = function(children) {
       return children.map(function(child) {
-        return child.getXAPIData();
+        if (typeof child.getXAPIData == 'function'){
+          return child.getXAPIData();
+        }
       });
     };
 
