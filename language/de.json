@@ -10,7 +10,6 @@
           },
           {
             "label":"Trenne Inhalt mit einer horizontalen Linie",
-            "default":"auto",
             "options":[
               {
                 "label":"Automatisch (Voreinstellung)"
