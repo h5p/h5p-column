@@ -10,7 +10,6 @@
           },
           {
             "label":"Separate content with a horizontal ruler",
-            "default":"auto",
             "options":[
               {
                 "label":"Automatic (default)"
