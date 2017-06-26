@@ -10,6 +10,7 @@
           },
           {
             "label":"Del innhold med en horisontal linje",
+            "default":"auto",
             "options":[
               {
                 "label":"Automatisk (standard)"
