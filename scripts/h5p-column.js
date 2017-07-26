@@ -85,7 +85,7 @@ H5P.Column = (function () {
           // Run this after the current event is sent
           setTimeout(function () {
             completed(); // Done
-          }, 0)
+          }, 0);
         }
       };
     };
@@ -331,7 +331,7 @@ H5P.Column = (function () {
       return {
         statement: xAPIEvent.data.statement,
         children: getXAPIDataFromChildren(instances)
-      }
+      };
     };
 
     /**
