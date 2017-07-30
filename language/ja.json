@@ -1,19 +1,19 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"カラムコンテンツのリスト",
+      "entity":"コンテンツ",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"コンテンツ"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "default":"auto",
+            "label":"水平線でコンテンツを分割",
+            "default":"自動",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"自動（デフォルト）"
               },
               {
                 "label":"Never use ruler above"
