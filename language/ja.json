@@ -16,10 +16,10 @@
                 "label":"自動（デフォルト）"
               },
               {
-                "label":"Never use ruler above"
+                "label":"水平線を使わない"
               },
               {
-                "label":"Always use ruler above"
+                "label":"水平線を使う"
               }
             ]
           }
