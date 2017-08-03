@@ -1,0 +1,30 @@
+{
+  "semantics": [
+    {
+      "label": "Sadržaj Kolone",
+      "entity": "sadžaj",
+      "field": {
+        "fields": [
+          {
+            "label": "Sadržaj"
+          },
+          {
+            "label": "Razdvoj sadržaj sa horizontalnom linijom",
+            "default": "auto",
+            "options": [
+              {
+                "label": "Automatski"
+              },
+              {
+                "label": "Nikada ne koristi liniju iznad"
+              },
+              {
+                "label": "Uvijek koristi liniju iznad"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
