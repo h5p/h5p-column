@@ -1,25 +1,25 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"Elenco dei contenuti di Column",
+      "entity":"contenuto",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"Contenuto"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "default":"auto",
+            "label":"Separa il contenuto con una riga orizzontale",
+            "default":"automatico",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"Automatico (impostazione predefinita)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"Non utilizzare mai la riga di separazione qui sopra"
               },
               {
-                "label":"Always use ruler above"
+                "label":"Usa sempre la riga di separazione qui sopra"
               }
             ]
           }
