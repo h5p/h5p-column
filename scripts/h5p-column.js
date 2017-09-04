@@ -85,7 +85,7 @@ H5P.Column = (function () {
           // Run this after the current event is sent
           setTimeout(function () {
             completed(); // Done
-          }, 0)
+          }, 0);
         }
       };
     };
@@ -127,7 +127,7 @@ H5P.Column = (function () {
         numTasks++;
       }
 
-      if (library === 'H5P.Image') {
+      if (library === 'H5P.Image' || library === 'H5P.TwitterUserFeed') {
         // Resize when images are loaded
 
         instance.on('loaded', function () {
@@ -331,7 +331,7 @@ H5P.Column = (function () {
       return {
         statement: xAPIEvent.data.statement,
         children: getXAPIDataFromChildren(instances)
-      }
+      };
     };
 
     /**
