@@ -393,6 +393,8 @@ H5P.Column = (function () {
         if (typeof child.getXAPIData == 'function'){
           return child.getXAPIData();
         }
+      }).filter(function (data) {
+        return !!data;
       });
     };
 
