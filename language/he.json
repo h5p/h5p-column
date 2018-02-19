@@ -1,25 +1,25 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"רשימה של תכנים בעמוד",
+      "entity":"תוכן",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"תוכן"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "default":"auto",
+            "label":"הפרדת תכנים בעזרת קו אופקי",
+            "default":"אוטומטי",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"אוטומטי (בררת־מחדל)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"ללא הפרדה"
               },
               {
-                "label":"Always use ruler above"
+                "label":"הפרדה תמיד"
               }
             ]
           }
