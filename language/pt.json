@@ -10,7 +10,6 @@
           },
           {
             "label":"Separate content with a horizontal ruler Separar conteúdo com uma linha horizontal",
-            "default":"automático",
             "options":[
               {
                 "label":"Automático (defeito)"

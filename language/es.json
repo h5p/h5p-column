@@ -10,7 +10,6 @@
           },
           {
             "label":"Separar contenido con una línea horizontal",
-            "default":"auto",
             "options":[
               {
                 "label":"Automatico (predeterminado)"
