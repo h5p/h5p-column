@@ -10,7 +10,7 @@ var H5PPresave = H5PPresave || {};
 H5PPresave['H5P.Column'] = function (content, finished) {
   var presave = H5PEditor.Presave;
   if (isContentInvalid()) {
-    throw new presave.exceptions.InvalidContentSemanticsException('Invalid Column Error')
+    throw new presave.exceptions.InvalidContentSemanticsException('Invalid Column Error');
   }
 
   var score = content.content
@@ -32,9 +32,7 @@ H5PPresave['H5P.Column'] = function (content, finished) {
 
   presave.validateScore(score);
 
-  if (finished) {
-    finished({maxScore: score});
-  }
+  finished({maxScore: score});
 
   /**
    * Check if required parameters is present
