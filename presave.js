@@ -9,7 +9,7 @@ var H5PPresave = H5PPresave || {};
  */
 H5PPresave['H5P.Column'] = function (content, finished) {
   var presave = H5PEditor.Presave;
-  if (isContentInValid()) {
+  if (isContentInvalid()) {
     throw new presave.exceptions.InvalidContentSemanticsException('Invalid Column Error')
   }
 
@@ -40,7 +40,7 @@ H5PPresave['H5P.Column'] = function (content, finished) {
    * Check if required parameters is present
    * @return {boolean}
    */
-  function isContentInValid() {
+  function isContentInvalid() {
     return !presave.checkNestedRequirements(content, 'content.content') || !Array.isArray(content.content);
   }
 };
