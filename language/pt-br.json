@@ -1,0 +1,30 @@
+{
+  "semantics":[
+    {
+      "label":"Lista de conteúdo da coluna",
+      "entity":"content",
+      "field":{
+        "fields":[
+          {
+            "label":"Conteúdo"
+          },
+          {
+            "label":"Separar conteúdos com uma linha horizontal",
+            "default":"auto",
+            "options":[
+              {
+                "label":"Automático (padrão)"
+              },
+              {
+                "label":"Nunca utilizar linha acima"
+              },
+              {
+                "label":"Sempre utilizar linha acima"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
