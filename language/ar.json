@@ -1,25 +1,24 @@
 {
-  "semantics":[
+  "semantics": [
     {
-      "label":"List of Column Content",
-      "entity":"content",
-      "field":{
-        "fields":[
+      "label": "قائمة بمحتوى العمود",
+      "entity": "content",
+      "field": {
+        "fields": [
           {
-            "label":"Content"
+            "label": "المحتوى"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "default":"auto",
-            "options":[
+            "label": "محتوى منفصل مع مسطرة أفقية",
+            "options": [
               {
-                "label":"Automatic (default)"
+                "label": "اتوماتيكي ( افتراضي )"
               },
               {
-                "label":"Never use ruler above"
+                "label": "لا تستخدم ابدا المسطرة اعلاه"
               },
               {
-                "label":"Always use ruler above"
+                "label": "استخدم دومًا المسطرة أعلاه"
               }
             ]
           }

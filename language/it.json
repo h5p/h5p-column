@@ -10,7 +10,6 @@
           },
           {
             "label":"Separa il contenuto con una riga orizzontale",
-            "default":"automatico",
             "options":[
               {
                 "label":"Automatico (impostazione predefinita)"

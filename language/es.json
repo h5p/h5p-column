@@ -1,25 +1,24 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"Lista de contenido de columna",
+      "entity":"contenido",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"Contenido"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "default":"auto",
+            "label":"Separar contenido con una línea horizontal",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"Automatico (predeterminado)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"Nunca use la línea horizontal"
               },
               {
-                "label":"Always use ruler above"
+                "label":"Siempre use la línea horizontal"
               }
             ]
           }
