@@ -319,7 +319,7 @@ H5P.Column = (function () {
      *
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
      */
-    self.getXAPIData = function(){
+    self.getXAPIData = function () {
       var xAPIEvent = self.createXAPIEventTemplate('answered');
       addQuestionToXAPI(xAPIEvent);
       xAPIEvent.setScoredResult(self.getScore(),
@@ -361,7 +361,7 @@ H5P.Column = (function () {
     /**
      * Add the question itself to the definition part of an xAPIEvent
      */
-    var addQuestionToXAPI = function(xAPIEvent) {
+    var addQuestionToXAPI = function (xAPIEvent) {
       var definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
       H5P.jQuery.extend(definition, getxAPIDefinition());
     };
@@ -388,9 +388,9 @@ H5P.Column = (function () {
      * @param {Array} of H5P instances
      * @returns {Array} of xAPI data objects used to build a report
      */
-    var getXAPIDataFromChildren = function(children) {
-      return children.map(function(child) {
-        if (typeof child.getXAPIData == 'function'){
+    var getXAPIDataFromChildren = function (children) {
+      return children.map(function (child) {
+        if (typeof child.getXAPIData == 'function') {
           return child.getXAPIData();
         }
       }).filter(function (data) {
