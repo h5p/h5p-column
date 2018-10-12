@@ -461,7 +461,8 @@ H5P.Column = (function () {
     'H5P.MemoryGame',
     'H5P.QuestionSet',
     'H5P.InteractiveVideo',
-    'H5P.CoursePresentation'
+    'H5P.CoursePresentation',
+    'H5P.DocumentationTool'
   ];
 
   /**
