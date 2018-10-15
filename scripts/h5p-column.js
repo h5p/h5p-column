@@ -359,6 +359,15 @@ H5P.Column = (function () {
     };
 
     /**
+     * Get instances for all children
+     *
+     * @return {Object[]} array of instances
+     */
+    self.getInstances = function () {
+      return instances;
+    };
+
+    /**
      * Add the question itself to the definition part of an xAPIEvent
      */
     var addQuestionToXAPI = function(xAPIEvent) {
