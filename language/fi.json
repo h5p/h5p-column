@@ -10,7 +10,6 @@
           },
           {
             "label":"Erota osio vaakaviivalla",
-            "default":"auto",
             "options":[
               {
                 "label":"Auto (oletus)"

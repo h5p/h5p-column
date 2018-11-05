@@ -1,24 +1,24 @@
 {
   "semantics": [
     {
-      "label": "List of Column Content",
+      "label": "欄位內容",
       "entity": "content",
       "field": {
         "fields": [
           {
-            "label": "Content"
+            "label": "內容"
           },
           {
-            "label": "Separate content with a horizontal ruler",
+            "label": "用水平線分隔內容",
             "options": [
               {
-                "label": "Automatic (default)"
+                "label": "自動（預設）"
               },
               {
-                "label": "Never use ruler above"
+                "label": "永不使用"
               },
               {
-                "label": "Always use ruler above"
+                "label": "永遠使用"
               }
             ]
           }

@@ -359,6 +359,15 @@ H5P.Column = (function () {
     };
 
     /**
+     * Get instances for all children
+     *
+     * @return {Object[]} array of instances
+     */
+    self.getInstances = function () {
+      return instances;
+    };
+
+    /**
      * Add the question itself to the definition part of an xAPIEvent
      */
     var addQuestionToXAPI = function (xAPIEvent) {
@@ -437,8 +446,11 @@ H5P.Column = (function () {
       // Prevent target from sending event back down
       target.bubblingUpwards = true;
 
-      // Trigger event
-      target.trigger(eventName, event);
+      //Avoid potential recursion if several columns are in the same frame
+      if (target.libraryInfo.machineName != 'H5P.Column') {
+        // Trigger event 
+        target.trigger(eventName, event);
+      }
 
       // Reset
       target.bubblingUpwards = false;
