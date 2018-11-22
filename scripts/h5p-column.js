@@ -446,9 +446,9 @@ H5P.Column = (function () {
       // Prevent target from sending event back down
       target.bubblingUpwards = true;
 
-      //Avoid potential recursion if several columns are in the same frame
-      if (target.libraryInfo.machineName != 'H5P.Column') {
-        // Trigger event 
+      // Avoid potential recursion if several columns are in the same frame
+      if (target.libraryInfo.machineName != 'H5P.Column' || origin.parent === target) {
+        // Trigger event
         target.trigger(eventName, event);
       }
 
