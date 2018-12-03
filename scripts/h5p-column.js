@@ -1,4 +1,4 @@
-H5P.Column = (function () {
+H5P.Column = (function (EventDispatcher) {
 
   /**
    * Column Constructor
@@ -9,7 +9,11 @@ H5P.Column = (function () {
    * @param {Object} data User specific data to adapt behavior
    */
   function Column(params, id, data) {
+    /** @alias H5P.Column# */
     var self = this;
+
+    // We support events by extending this class
+    EventDispatcher.call(self);
 
     // Add defaults
     params = params || {};
@@ -360,6 +364,8 @@ H5P.Column = (function () {
 
     /**
      * Get instances for all children
+     * TODO: This is not a good interface, we should provide handling needed
+     * handling of the tasks instead of repeating them for each parent...
      *
      * @return {Object[]} array of instances
      */
@@ -413,6 +419,9 @@ H5P.Column = (function () {
     self.setActivityStarted();
   }
 
+  Column.prototype = Object.create(EventDispatcher.prototype);
+  Column.prototype.constructor = Column;
+
   /**
    * Makes it easy to bubble events from parent to children
    *
@@ -446,11 +455,8 @@ H5P.Column = (function () {
       // Prevent target from sending event back down
       target.bubblingUpwards = true;
 
-      // Avoid potential recursion if several columns are in the same frame
-      if (target.libraryInfo.machineName != 'H5P.Column' || origin.parent === target) {
-        // Trigger event
-        target.trigger(eventName, event);
-      }
+      // Trigger event
+      target.trigger(eventName, event);
 
       // Reset
       target.bubblingUpwards = false;
@@ -557,4 +563,4 @@ H5P.Column = (function () {
   }
 
   return Column;
-})();
+})(H5P.EventDispatcher);
