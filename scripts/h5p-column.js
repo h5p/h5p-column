@@ -375,6 +375,24 @@ H5P.Column = (function (EventDispatcher) {
     };
 
     /**
+     * Show solutions.
+     * Contract.
+     */
+    self.showSolutions = function () {
+      instances.forEach(function (instance) {
+        if (instance.toggleReadSpeaker) {
+          instance.toggleReadSpeaker(true);
+        }
+        if (instance.showSolutions) {
+          instance.showSolutions();
+        }
+        if (instance.toggleReadSpeaker) {
+          instance.toggleReadSpeaker(false);
+        }
+      });
+    };
+
+    /**
      * Get instances for all children
      * TODO: This is not a good interface, we should provide handling needed
      * handling of the tasks instead of repeating them for each parent...
