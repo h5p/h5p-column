@@ -393,6 +393,18 @@ H5P.Column = (function (EventDispatcher) {
     };
 
     /**
+     * Reset task.
+     * Contract.
+     */
+    self.resetTask = function () {
+      instances.forEach(function (instance) {
+        if (instance.resetTask) {
+          instance.resetTask();
+        }
+      });
+    };
+
+    /**
      * Get instances for all children
      * TODO: This is not a good interface, we should provide handling needed
      * handling of the tasks instead of repeating them for each parent...
