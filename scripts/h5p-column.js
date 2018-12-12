@@ -366,12 +366,12 @@ H5P.Column = (function (EventDispatcher) {
      * Get answer given
      * Contract.
      *
-     * @return {boolean} True, if at least one content has given answer.
+     * @return {boolean} True, if all answers have been given.
      */
     self.getAnswerGiven = function () {
       return instances.reduce(function (prev, instance) {
-        return prev || (instance.getAnswerGiven ? instance.getAnswerGiven() : false);
-      }, false);
+        return prev && (instance.getAnswerGiven ? instance.getAnswerGiven() : prev);
+      }, true);
     };
 
     /**
