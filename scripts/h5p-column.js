@@ -21,6 +21,8 @@ H5P.Column = (function (EventDispatcher) {
       params.useSeparators = true;
     }
 
+    this.contentData = data;
+
     // Column wrapper element
     var wrapper;
 
@@ -413,6 +415,15 @@ H5P.Column = (function (EventDispatcher) {
      */
     self.getInstances = function () {
       return instances;
+    };
+
+    /**
+     * Get title, e.g. for xAPI when Column is subcontent.
+     *
+     * @return {string} Title.
+     */
+    self.getTitle = function () {
+      return H5P.createTitle((self.contentData && self.contentData.metadata && self.contentData.metadata.title) ? self.contentData.metadata.title : 'Column');
     };
 
     /**
