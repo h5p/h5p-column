@@ -441,7 +441,7 @@ H5P.Column = (function (EventDispatcher) {
     var getxAPIDefinition = function () {
       var definition = {};
 
-      definition.interactionType = 'compound';
+      definition.interactionType = 'other';
       definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
       definition.description = {
         'en-US': ''
