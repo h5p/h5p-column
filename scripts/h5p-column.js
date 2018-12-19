@@ -28,6 +28,7 @@ H5P.Column = (function (EventDispatcher) {
 
     // H5P content in the column
     var instances = [];
+    var instanceContainers = [];
 
     // Number of tasks among instances
     var numTasks = 0;
@@ -117,7 +118,7 @@ H5P.Column = (function (EventDispatcher) {
       }
 
       // Create content instance
-      var instance = H5P.newRunnable(content, id, H5P.jQuery(container), true, contentData);
+      var instance = H5P.newRunnable(content, id, undefined, true, contentData);
 
       // Remove any fullscreen buttons
       disableFullscreen(instance);
@@ -143,6 +144,11 @@ H5P.Column = (function (EventDispatcher) {
 
       // Keep track of all instances
       instances.push(instance);
+      instanceContainers.push({
+        hasAttached: false,
+        container: container,
+        instanceIndex: instances.length - 1,
+      });
 
       // Add to DOM wrapper
       wrapper.appendChild(container);
@@ -286,6 +292,14 @@ H5P.Column = (function (EventDispatcher) {
         // Create wrapper and content
         createHTML();
       }
+
+      // Attach instances that have not been attached
+      instanceContainers.filter(container => !container.hasAttached)
+        .forEach(container => {
+          instances[container.instanceIndex]
+            .attach(H5P.jQuery(container.container));
+        });
+
 
       // Add to DOM
       $container.addClass('h5p-column').html('').append(wrapper);
@@ -468,6 +482,11 @@ H5P.Column = (function (EventDispatcher) {
 
     // Resize children to fit inside parent
     bubbleDown(self, 'resize', instances);
+
+    if (wrapper === undefined) {
+      // Create wrapper and content
+      createHTML();
+    }
 
     self.setActivityStarted();
   }
