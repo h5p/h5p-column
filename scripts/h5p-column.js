@@ -127,7 +127,7 @@ H5P.Column = (function (EventDispatcher) {
       bubbleUp(instance, 'resize', self);
 
       // Check if instance is a task
-      if (isTask(instance)) {
+      if (Column.isTask(instance)) {
         // Tasks requires completion
 
         instance.on('xAPI', trackScoring(numTasks));
@@ -561,7 +561,7 @@ H5P.Column = (function (EventDispatcher) {
    * @param {Object} instance
    * @return {boolean}
    */
-  function isTask(instance) {
+  Column.isTask = function (instance) {
     // Go through the valid task names
     for (var i = 0; i < isTasks.length; i++) {
       // Check against library info. (instanceof is broken in H5P.newRunnable)
