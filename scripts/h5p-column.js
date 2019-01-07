@@ -70,7 +70,7 @@ H5P.Column = (function (EventDispatcher) {
      */
     var trackScoring = function (taskIndex) {
       return function (event) {
-        if (!event.isFromChild() || event.getScore() === null) {
+        if (event.getScore() === null) {
           return; // Skip, not relevant
         }
 
@@ -562,6 +562,10 @@ H5P.Column = (function (EventDispatcher) {
    * @return {boolean}
    */
   Column.isTask = function (instance) {
+    if (instance.isTask !== undefined) {
+      return instance.isTask; // Content will determine self if it's a task
+    }
+
     // Go through the valid task names
     for (var i = 0; i < isTasks.length; i++) {
       // Check against library info. (instanceof is broken in H5P.newRunnable)
