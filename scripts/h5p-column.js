@@ -294,8 +294,8 @@ H5P.Column = (function (EventDispatcher) {
       }
 
       // Attach instances that have not been attached
-      instanceContainers.filter(container => !container.hasAttached)
-        .forEach(container => {
+      instanceContainers.filter(function (container) { return !container.hasAttached })
+        .forEach(function (container) {
           instances[container.instanceIndex]
             .attach(H5P.jQuery(container.container));
         });
