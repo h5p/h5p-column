@@ -120,9 +120,6 @@ H5P.Column = (function (EventDispatcher) {
       // Create content instance
       var instance = H5P.newRunnable(content, id, undefined, true, contentData);
 
-      // Remove any fullscreen buttons
-      disableFullscreen(instance);
-
       // Bubble resize events
       bubbleUp(instance, 'resize', self);
 
@@ -298,6 +295,9 @@ H5P.Column = (function (EventDispatcher) {
         .forEach(function (container) {
           instances[container.instanceIndex]
             .attach(H5P.jQuery(container.container));
+
+          // Remove any fullscreen buttons
+          disableFullscreen(instances[container.instanceIndex]);
         });
 
 

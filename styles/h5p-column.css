@@ -80,3 +80,9 @@
   margin-left: 0;
   margin-right: 2em;
 }
+
+/* Remove fullscreen for video tags and DQ */
+.h5p-interactive-book video::-webkit-media-controls-fullscreen-button,
+.h5p-interactive-book .h5p-my-fullscreen-button-enter {
+  display: none;
+}
