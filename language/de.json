@@ -1,24 +1,24 @@
 {
-  "semantics":[
+  "semantics": [
     {
-      "label":"Liste der Spalteninhalte",
-      "entity":"inhalt",
-      "field":{
-        "fields":[
+      "label": "Liste der Spalteninhalte",
+      "entity": "Inhalt",
+      "field": {
+        "fields": [
           {
-            "label":"Inhalt"
+            "label": "Inhalt"
           },
           {
-            "label":"Trenne Inhalt mit einer horizontalen Linie",
-            "options":[
+            "label": "Trenne Inhalt mit einer horizontalen Linie",
+            "options": [
               {
-                "label":"Automatisch (Voreinstellung)"
+                "label": "Automatisch (Voreinstellung)"
               },
               {
-                "label":"Niemals eine Linie darüber nutzen"
+                "label": "Vor diesem Inhalt nie eine Trennlinie anzeigen"
               },
               {
-                "label":"Immer eine Linie darüber nutzen"
+                "label": "Vor diesem Inhalt immer eine Trennlinie anzeigen"
               }
             ]
           }
