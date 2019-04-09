@@ -1,24 +1,24 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"Veeru sisu loetelu",
+      "entity":"sisu",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"Sisu"
           },
           {
-            "label":"Separate content with a horizontal ruler",
+            "label":"Eralda sisu horisontaaljoonega",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"Automaatne (vaikimisi)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"Ära kasuta eraldajat kunagi"
               },
               {
-                "label":"Always use ruler above"
+                "label":"Alati kasuta eraldajat"
               }
             ]
           }
