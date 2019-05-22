@@ -1,24 +1,24 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"lista sadržaja stupca",
+      "entity":"sadržaj",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"Sadržaj"
           },
           {
-            "label":"Separate content with a horizontal ruler",
+            "label":"Razdvoji sadržaje sa linijom",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"Automatski (default)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"Nikad ne koristi razdvajanje gore"
               },
               {
-                "label":"Always use ruler above"
+                "label":"Uvijek koristi razdvajanje gore"
               }
             ]
           }
