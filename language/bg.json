@@ -1,0 +1,29 @@
+﻿{
+  "semantics": [
+    {
+      "label": "Списък на съдържание Колони",
+      "entity": "съдържание",
+      "field": {
+        "fields": [
+          {
+            "label": "Съдържание"
+          },
+          {
+            "label": "Separate content with a horizontal ruler",
+            "options": [
+              {
+                "label": "Automatic (default)"
+              },
+              {
+                "label": "Never use ruler above"
+              },
+              {
+                "label": "Always use ruler above"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
