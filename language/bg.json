@@ -1,4 +1,4 @@
-﻿{
+{
   "semantics": [
     {
       "label": "Списък на съдържание Колони",
@@ -9,16 +9,16 @@
             "label": "Съдържание"
           },
           {
-            "label": "Separate content with a horizontal ruler",
+            "label": "Разделете съдържанието с хоризонтален линеал",
             "options": [
               {
-                "label": "Automatic (default)"
+                "label": "Автоматично (по подразбиране)"
               },
               {
-                "label": "Never use ruler above"
+                "label": "Никога не използвайте линеал по-горе"
               },
               {
-                "label": "Always use ruler above"
+                "label": "Винаги използвайте линеал по-горе"
               }
             ]
           }
