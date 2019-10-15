@@ -1,24 +1,24 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"Λίστα αντικειμένων σε στήλες",
+      "entity":"αντικειμενου",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"Αντικείμενο"
           },
           {
-            "label":"Separate content with a horizontal ruler",
+            "label":"Διαχωρισμός αντικειμένων με οριζόντια γραμμή",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"Αυτόματο (προεπιλογή)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"Ποτέ με διαχωριστικό"
               },
               {
-                "label":"Always use ruler above"
+                "label":"Πάντα με διαχωριστικό"
               }
             ]
           }

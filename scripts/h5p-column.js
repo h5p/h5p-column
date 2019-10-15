@@ -541,6 +541,7 @@ H5P.Column = (function (EventDispatcher) {
   var isTasks = [
     'H5P.ImageHotspotQuestion',
     'H5P.Blanks',
+    'H5P.Essay',
     'H5P.SingleChoiceSet',
     'H5P.MultiChoice',
     'H5P.TrueFalse',
@@ -582,6 +583,8 @@ H5P.Column = (function (EventDispatcher) {
    */
   var hasMargins = [
     'H5P.AdvancedText',
+    'H5P.AudioRecorder',
+    'H5P.Essay',
     'H5P.Link',
     'H5P.Accordion',
     'H5P.Table',
@@ -611,7 +614,10 @@ H5P.Column = (function (EventDispatcher) {
    * Definition of which content type have bottom margins
    */
   var hasBottomMargins = [
-    'H5P.CoursePresentation'
+    'H5P.CoursePresentation',
+    'H5P.Dialogcards',
+    'H5P.GuessTheAnswer',
+    'H5P.ImageSlider'
   ];
 
   /**
