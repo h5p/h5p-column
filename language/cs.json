@@ -1,24 +1,24 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"Seznam obsahu sloupců",
+      "entity":"obsah",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"Obsah"
           },
           {
-            "label":"Separate content with a horizontal ruler",
+            "label":"Oddělit obsah vodorovným pravítkem",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"Automaticky (výchozí)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"Nikdy nepoužívat pravítko výše"
               },
               {
-                "label":"Always use ruler above"
+                "label":"Vždy používat pravítko výše"
               }
             ]
           }

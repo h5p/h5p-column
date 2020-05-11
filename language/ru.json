@@ -1,24 +1,24 @@
 {
-  "semantics":[
+  "semantics": [
     {
-      "label":"List of Column Content",
-      "entity":"content",
-      "field":{
-        "fields":[
+      "label": "Список содержимого контента",
+      "entity": "контент",
+      "field": {
+        "fields": [
           {
-            "label":"Content"
+            "label": "Контент"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "options":[
+            "label": "Разделить контент горизонтальной линией",
+            "options": [
               {
-                "label":"Automatic (default)"
+                "label": "Автоматически (по умолчанию)"
               },
               {
-                "label":"Never use ruler above"
+                "label": "Никогда не использовать линию сверху"
               },
               {
-                "label":"Always use ruler above"
+                "label": "Всегда использовать линию сверху"
               }
             ]
           }
