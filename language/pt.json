@@ -1,7 +1,7 @@
 {
   "semantics":[
     {
-      "label":"Lista de Conteúdo em Coluna",
+      "label":"Lista do Conteúdo da Coluna",
       "entity":"conteúdo",
       "field":{
         "fields":[
@@ -9,10 +9,10 @@
             "label":"Conteúdo"
           },
           {
-            "label":"Separate content with a horizontal ruler Separar conteúdo com uma linha horizontal",
+            "label":"Separar conteúdo com uma linha horizontal",
             "options":[
               {
-                "label":"Automático (defeito)"
+                "label":"Automático (predefenição)"
               },
               {
                 "label":"Nunca utilizar a regra acima"
