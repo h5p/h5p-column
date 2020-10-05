@@ -1,24 +1,24 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
-      "entity":"content",
+      "label":"열(column)로된 콘텐츠 목록",
+      "entity":" 콘텐츠",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"콘텐츠"
           },
           {
-            "label":"Separate content with a horizontal ruler",
+            "label":"수평 눈금자로 내용 구분",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"자동 (기본값)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"눈금자 사용 않기e"
               },
               {
-                "label":"Always use ruler above"
+                "label":"항상눈금자 사용하기"
               }
             ]
           }
