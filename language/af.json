@@ -1,24 +1,24 @@
 {
-  "semantics":[
+  "semantics": [
     {
-      "label":"List of Column Content",
-      "entity":"content",
-      "field":{
-        "fields":[
+      "label": "Lys van kolominhoud",
+      "entity": "inhoud",
+      "field": {
+        "fields": [
           {
-            "label":"Content"
+            "label": "Inhoud"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "options":[
+            "label": "Skei die inhoud met 'n horisontale liniaal",
+            "options": [
               {
-                "label":"Automatic (default)"
+                "label": "Outomaties (verstek)"
               },
               {
-                "label":"Never use ruler above"
+                "label": "Moet nooit liniaal hierbo gebruik nie"
               },
               {
-                "label":"Always use ruler above"
+                "label": "Gebruik altyd die liniaal hierbo"
               }
             ]
           }
