@@ -2,7 +2,7 @@
   "semantics": [
     {
       "label": "قائمة بمحتوى العمود",
-      "entity": "content",
+      "entity": "المحتوى",
       "field": {
         "fields": [
           {
