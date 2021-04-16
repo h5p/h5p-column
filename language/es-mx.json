@@ -1,24 +1,24 @@
 {
-  "semantics":[
+  "semantics": [
     {
-      "label":"Lista de contenido de columna",
-      "entity":"contenido",
-      "field":{
-        "fields":[
+      "label": "Lista de Contenido de Columna",
+      "entity": "contenido",
+      "field": {
+        "fields": [
           {
-            "label":"Contenido"
+            "label": "Contenido"
           },
           {
-            "label":"Separar contenido con una línea horizontal",
-            "options":[
+            "label": "Separar contenido con una regla horizontal",
+            "options": [
               {
-                "label":"Automatico (predeterminado)"
+                "label": "Automático (predeterminado)"
               },
               {
-                "label":"Nunca use la línea horizontal"
+                "label": "Nunca usar regla arriba"
               },
               {
-                "label":"Siempre use la línea horizontal"
+                "label": "Siempre usar regla arriba"
               }
             ]
           }
