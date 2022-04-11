@@ -131,7 +131,7 @@ H5P.Column = (function (EventDispatcher) {
         numTasks++;
       }
 
-      if (library === 'H5P.Image' || library === 'H5P.TwitterUserFeed') {
+      if (library === 'H5P.Image') {
         // Resize when images are loaded
 
         instance.on('loaded', function () {
