@@ -51,7 +51,7 @@ H5PUpgrades['H5P.Column'] = (function () {
        * @param {Object} parameters
        * @param {function} finished
        */
-      14: function (parameters, finished, extras) {
+      16: function (parameters, finished, extras) {
 
         if (parameters && parameters.content) {
 
