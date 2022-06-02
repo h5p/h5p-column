@@ -1,24 +1,24 @@
 {
   "semantics":[
     {
-      "label":"List of Column Content",
+      "label":"Списак садржаја колоне",
       "entity":"content",
       "field":{
         "fields":[
           {
-            "label":"Content"
+            "label":"Садржај"
           },
           {
-            "label":"Separate content with a horizontal ruler",
+            "label":"Одвојите садржај водоравним лењиром",
             "options":[
               {
-                "label":"Automatic (default)"
+                "label":"Аутоматски (default)"
               },
               {
-                "label":"Never use ruler above"
+                "label":"Никада не користите лењир изнад"
               },
               {
-                "label":"Always use ruler above"
+                "label":"Увек користите лењир горе"
               }
             ]
           }

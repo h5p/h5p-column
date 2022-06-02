@@ -1,24 +1,24 @@
 {
-  "semantics":[
+  "semantics": [
     {
-      "label":"List of Column Content",
-      "entity":"content",
-      "field":{
-        "fields":[
+      "label": "Danh sách nội dung của Cột",
+      "entity": "nội dung",
+      "field": {
+        "fields": [
           {
-            "label":"Content"
+            "label": "Nội dung"
           },
           {
-            "label":"Separate content with a horizontal ruler",
-            "options":[
+            "label": "Phân cách nội dung bằng một đường thẳng ngang",
+            "options": [
               {
-                "label":"Automatic (default)"
+                "label": "Tự động (mặc định)"
               },
               {
-                "label":"Never use ruler above"
+                "label": "Không dùng đường phân cách ở trên"
               },
               {
-                "label":"Always use ruler above"
+                "label": "Luôn dùng đường phân cách ở trên"
               }
             ]
           }
