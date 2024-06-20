@@ -66,12 +66,17 @@ H5P.Column = (function (EventDispatcher) {
      *
      * @private
      * @param {number} taskIndex
+     * @param {string} library
      * @return {function} xAPI event handler
      */
-    var trackScoring = function (taskIndex) {
+    var trackScoring = function (taskIndex, library) {
       return function (event) {
         if (event.getScore() === null) {
           return; // Skip, not relevant
+        }
+
+        if (library === 'H5P.SingleChoiceSet' && event.getVerb() === 'answered') {
+          return; // Ignore answered event
         }
 
         if (tasksResultEvent[taskIndex] === undefined) {
@@ -127,7 +132,7 @@ H5P.Column = (function (EventDispatcher) {
       if (Column.isTask(instance)) {
         // Tasks requires completion
 
-        instance.on('xAPI', trackScoring(numTasks));
+        instance.on('xAPI', trackScoring(numTasks, library));
         numTasks++;
       }
 
