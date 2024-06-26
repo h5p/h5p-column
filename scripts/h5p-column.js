@@ -21,6 +21,11 @@ H5P.Column = (function (EventDispatcher) {
       params.useSeparators = true;
     }
 
+    // Fallback if column is empty
+    if (params.content === undefined) {
+      params.content = [];
+    }
+
     this.contentData = data;
 
     // Column wrapper element
