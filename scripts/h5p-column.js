@@ -476,11 +476,20 @@ H5P.Column = (function (EventDispatcher) {
      * @returns {Array} of xAPI data objects used to build a report
      */
     var getXAPIDataFromChildren = function (children) {
-      return children.map(function (child) {
+      let childData = [];
+
+      children.forEach(child => {
         if (typeof child.getXAPIData == 'function') {
-          return child.getXAPIData();
+          if (child.libraryInfo.machineName === 'H5P.Row') {
+            childData.push(...child.getXAPIData());
+          }
+          else {
+            childData.push(child.getXAPIData());
+          }
         }
-      }).filter(function (data) {
+      });
+
+      return childData.filter(function (data) {
         return !!data;
       });
     };
