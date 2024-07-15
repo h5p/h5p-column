@@ -479,13 +479,11 @@ H5P.Column = (function (EventDispatcher) {
       let childData = [];
 
       children.forEach(child => {
-        if (typeof child.getXAPIData == 'function') {
-          if (child.libraryInfo.machineName === 'H5P.Row') {
-            childData.push(...child.getXAPIData());
-          }
-          else {
-            childData.push(child.getXAPIData());
-          }
+        if (child.libraryInfo.machineName === 'H5P.Row') {
+          childData.push(...child.getXAPIDataFromChildren());
+        }
+        else if (typeof child.getXAPIData == 'function') {
+          childData.push(child.getXAPIData());
         }
       });
 
