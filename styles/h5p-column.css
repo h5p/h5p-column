@@ -86,3 +86,13 @@
 .h5p-interactive-book .h5p-my-fullscreen-button-enter {
   display: none;
 }
+
+.h5p-theme .h5p-semi-fullscreen, .h5p-fullscreen, html.h5p-iframe .h5p-container{
+  background-color: var(--ui-base) !important;
+}
+
+/*H5P theme overrides (don't work with .h5p-theme) */
+.h5p-column-ruler {
+  border-bottom: 2px solid var(--ui-base) !important;
+}
+
