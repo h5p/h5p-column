@@ -305,9 +305,8 @@ H5P.Column = (function (EventDispatcher) {
           disableFullscreen(instances[container.instanceIndex]);
         });
 
-
       // Add to DOM
-      $container.addClass('h5p-column').html('').append(wrapper);
+      $container.addClass('h5p-column h5p-theme').html('').append(wrapper);
     };
 
     /**
