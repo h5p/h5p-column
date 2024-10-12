@@ -500,7 +500,10 @@ H5P.Column = (function (EventDispatcher) {
       createHTML();
     }
 
-    self.setActivityStarted();
+    // Expect parent to set activity started when Column is actually shown
+    if (typeof self.isRoot === 'function' && self.isRoot()) {
+      self.setActivityStarted();
+    }
   }
 
   Column.prototype = Object.create(EventDispatcher.prototype);
