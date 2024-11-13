@@ -54,6 +54,9 @@
   margin-top: 1em;
 }
 
+.h5p-column .questionset{
+  padding: 0;
+}
 /* Align text content when there's no frame */
 .h5p-no-frame > .h5p-column > div > .h5p-table,
 .h5p-no-frame > .h5p-column > div > .h5p-advanced-text,
