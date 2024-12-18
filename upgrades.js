@@ -55,6 +55,12 @@ H5PUpgrades['H5P.Column'] = (function () {
         if (parameters && parameters.content) {
           const oldContent = [...parameters.content];
 
+          if (parameters.content?.filter(c => c.content?.library.includes('H5P.Row')) {
+            // Don't upgrade content that already uses H5P.Row
+            finished(null, parameters);
+            return;
+          }
+
           const newRowColumn = {
             library: 'H5P.RowColumn 0.0', // make this 1.0 to match H5P.Row
             metadata: { contentType: 'Column', license: 'U', title: 'Untitled Column' }, // should this say RowColumn instead? what is the significance?
