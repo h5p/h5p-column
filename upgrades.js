@@ -55,7 +55,7 @@ H5PUpgrades['H5P.Column'] = (function () {
         if (parameters && parameters.content) {
           const oldContent = [...parameters.content];
 
-          if (parameters.content?.filter(c => c.content?.library.includes('H5P.Row')) {
+          if (parameters.content?.filter(c => c.content?.library.includes('H5P.Row'))) {
             // Don't upgrade content that already uses H5P.Row
             finished(null, parameters);
             return;
