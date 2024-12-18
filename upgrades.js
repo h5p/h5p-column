@@ -62,7 +62,7 @@ H5PUpgrades['H5P.Column'] = (function () {
           }
 
           const newRowColumn = {
-            library: 'H5P.RowColumn 0.0', // make this 1.0 to match H5P.Row
+            library: 'H5P.RowColumn 1.0',
             metadata: { contentType: 'Column', license: 'U', title: 'Untitled Column' }, // should this say RowColumn instead? what is the significance?
             params: {
               content: oldContent,
@@ -76,8 +76,6 @@ H5PUpgrades['H5P.Column'] = (function () {
             params: {
               columns: [{
                 content: newRowColumn,
-                paddings: { unit: 'px' }, // maybe we should get rid of this since we aren't using it atm
-                width: 100, // maybe this should be optional
               }],
             },
             subContentId: H5P.createUUID(),
