@@ -87,7 +87,7 @@ H5PUpgrades['H5P.Column'] = (function () {
           };
 
           const newRow = {
-            library: 'H5P.Row 1.0',
+            library: 'H5P.Row 1.1',
             metadata: { contentType: 'Row', license: 'U', title: 'Untitled Row' },
             params: {
               columns: [{
