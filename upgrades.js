@@ -7,7 +7,7 @@ H5PUpgrades['H5P.Column'] = (function () {
    * @returns {string}  A UUID
    */
   function createUUID() {
-    if (window.crypto && typeof crypto.randomUUID === 'function') {
+    if (globalThis.crypto && typeof crypto.randomUUID === 'function') {
       return crypto.randomUUID(); // Always better to use the native functionality
     }
     // Fallback
