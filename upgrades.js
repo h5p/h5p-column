@@ -1,6 +1,22 @@
 var H5PUpgrades = H5PUpgrades || {};
 
 H5PUpgrades['H5P.Column'] = (function () {
+  /**
+   * Generate a v4 UUID.
+   *
+   * @returns {string}  A UUID
+   */
+  function createUUID() {
+    if (window.crypto && typeof crypto.randomUUID === 'function') {
+      return crypto.randomUUID(); // Always better to use the native functionality
+    }
+    // Fallback
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (char) {
+      var random = Math.random()*16|0, newChar = char === 'x' ? random : (random&0x3|0x8);
+      return newChar.toString(16);
+    });
+  };
+
   return {
     1: {
 
@@ -67,7 +83,7 @@ H5PUpgrades['H5P.Column'] = (function () {
             params: {
               content: oldContent,
             },
-            subContentId: H5P.createUUID(),
+            subContentId: createUUID(),
           };
 
           const newRow = {
@@ -78,7 +94,7 @@ H5PUpgrades['H5P.Column'] = (function () {
                 content: newRowColumn,
               }],
             },
-            subContentId: H5P.createUUID(),
+            subContentId: createUUID(),
           };
 
           parameters.content = [{
