@@ -128,11 +128,35 @@ H5P.Column = (function (EventDispatcher) {
       // Bubble resize events
       bubbleUp(instance, 'resize', self);
 
+      // Keep track of all instances that are tasks
+      const taskInstances = [];
+
       // Check if instance is a task
       if (Column.isTask(instance)) {
         // Tasks requires completion
+        taskInstances.push(instance);
+      }
 
-        instance.on('xAPI', trackScoring(numTasks));
+      // For H5P.Row, we'll retrieve the actual task instances
+      if (library === 'H5P.Row') {
+        const rowColumns = instance.getInstances();
+
+        // A row can have several columns
+        for (const rowColumn of rowColumns) {
+
+          // And each row column can have several content types,
+          // some of which might be tasks
+          const rowColumnInstances = rowColumn.getInstances();
+          for (const rowColumnInstance of rowColumnInstances) {
+            if (Column.isTask(rowColumnInstance)) {
+              taskInstances.push(rowColumnInstance);
+            }
+          }
+        }
+      }
+
+      for (const task of taskInstances) {
+        task.on('xAPI', trackScoring(numTasks));
         numTasks++;
       }
 
