@@ -228,7 +228,7 @@ H5P.Column = (function (EventDispatcher) {
           // not wrapper on Row and RowColumn.
           const contentInColumn = content.params.columns[0].content.params.content[0];
 
-          addSeparator(contentInColumn.library.split(' ')[0], useSeparator);
+          addSeparator(contentInColumn.library.split(' ')[0], useSeparator ?? 'auto');
           return;
         }
       }
