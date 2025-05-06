@@ -214,8 +214,10 @@ H5P.Column = (function (EventDispatcher) {
       // If it has automatic, we still need to check the children to determine how to calculate the 
       // separator.
       if (libraryName === 'H5P.Row' && (useSeparator === undefined || useSeparator === 'auto')) {
+        let columnCount = content.params?.columns?.length ?? 0;
         let contentCount = content.params?.columns?.reduce((count, column) => {
           count += column.content?.params?.content?.length ?? 0;
+
           return count;
         }, 0);
 
@@ -223,12 +225,15 @@ H5P.Column = (function (EventDispatcher) {
         // than a single content inside a row. We also don't want a separator if we don't have any content
         if (contentCount > 1 || contentCount === 0) {
           useSeparator = 'disabled';
-        } else {
+        } else if (columnCount === 1) {
           // If we only have one content, we want to follow the same procedure as if that content was
           // not wrapper on Row and RowColumn.
-          const contentInColumn = content.params.columns[0].content.params.content[0];
+          const contentInColumn = content.params.columns[0].content.params?.content[0];
 
           addSeparator(contentInColumn.library.split(' ')[0], useSeparator ?? 'auto');
+          return;
+        } else {
+          // No separator.
           return;
         }
       }
