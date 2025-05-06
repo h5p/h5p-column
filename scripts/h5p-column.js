@@ -206,16 +206,38 @@ H5P.Column = (function (EventDispatcher) {
      * @param {string} libraryName Name of the next content type
      * @param {string} useSeparator
      */
-    var addSeparator = function (libraryName, useSeparator) {
+    var addSeparator = function (libraryName, useSeparator, content) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
+      
+      // If we have a row and it doesn't have separator defined we will have to look at the children.
+      // If it has automatic, we still need to check the children to determine how to calculate the 
+      // separator.
+      if (libraryName === 'H5P.Row' && (useSeparator === undefined || useSeparator === 'auto')) {
+        let contentCount = content.params?.columns?.reduce((count, column) => {
+          count += column.content?.params?.content?.length ?? 0;
+          return count;
+        }, 0);
+
+        // To avoid messy margin computation, separator setting should be disabled when there is more
+        // than a single content inside a row. We also don't want a separator if we don't have any content
+        if (contentCount > 1 || contentCount === 0) {
+          useSeparator = 'disabled';
+        } else {
+          // If we only have one content, we want to follow the same procedure as if that content was
+          // not wrapper on Row and RowColumn.
+          const contentInColumn = content.params.columns[0].content.params.content[0];
+
+          addSeparator(contentInColumn.library.split(' ')[0], useSeparator ?? 'auto');
+          return;
+        }
+      }
 
       // Only add if previous content exists
       if (previousHasMargin !== undefined) {
 
         // Create separator element
         var separator = document.createElement('div');
-        //separator.classList.add('h5p-column-ruler');
 
         // If no margins, check for top margin only
         if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
@@ -300,7 +322,7 @@ H5P.Column = (function (EventDispatcher) {
         if (params.useSeparators) { // (check for global override)
 
           // Add separator between contents
-          addSeparator(content.content.library.split(' ')[0], content.useSeparator);
+          addSeparator(content.content.library.split(' ')[0], content.useSeparator, content.content);
         }
 
         // Add content
