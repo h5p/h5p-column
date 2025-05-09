@@ -213,7 +213,7 @@ H5P.Column = (function (EventDispatcher) {
       // If we have a row and it doesn't have separator defined we will have to look at the children.
       // If it has automatic, we still need to check the children to determine how to calculate the 
       // separator.
-      if (libraryName === 'H5P.Row' && (useSeparator === undefined || useSeparator === 'auto')) {
+      if (libraryName === 'H5P.Row') {
         let columnCount = content.params?.columns?.length ?? 0;
         let contentCount = content.params?.columns?.reduce((count, column) => {
           count += column.content?.params?.content?.length ?? 0;
