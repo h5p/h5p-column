@@ -209,11 +209,11 @@ H5P.Column = (function (EventDispatcher) {
     var addSeparator = function (libraryName, useSeparator, content) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
-      
+
       // If we have a row and it doesn't have separator defined we will have to look at the children.
       // If it has automatic, we still need to check the children to determine how to calculate the 
       // separator.
-      if (libraryName === 'H5P.Row') {
+      if (libraryName === 'H5P.Row' && (useSeparator === undefined || useSeparator === 'auto')) {
         let columnCount = content.params?.columns?.length ?? 0;
         let contentCount = content.params?.columns?.reduce((count, column) => {
           count += column.content?.params?.content?.length ?? 0;
@@ -236,13 +236,18 @@ H5P.Column = (function (EventDispatcher) {
           // No separator.
           return;
         }
+      } else if (libraryName === 'H5P.Row') {
+        let separator = document.createElement('div');
+        separator.classList.add('h5p-column-ruler');
+        wrapper.appendChild(separator);
+        return;
       }
 
       // Only add if previous content exists
       if (previousHasMargin !== undefined) {
 
         // Create separator element
-        var separator = document.createElement('div');
+        let separator = document.createElement('div');
 
         // If no margins, check for top margin only
         if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
