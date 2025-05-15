@@ -209,28 +209,26 @@ H5P.Column = (function (EventDispatcher) {
     var addSeparator = function (libraryName, useSeparator, content) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
-      
-      // If we have a row and it doesn't have separator defined we will have to look at the children.
-      // If it has automatic, we still need to check the children to determine how to calculate the 
-      // separator.
-      if (libraryName === 'H5P.Row') {
-        let columnCount = content.params?.columns?.length ?? 0;
-        let contentCount = content.params?.columns?.reduce((count, column) => {
-          count += column.content?.params?.content?.length ?? 0;
 
+      if (libraryName === 'H5P.Row') {
+        let lastContent = null;
+        let contentCount = content.params?.columns?.reduce((count, column) => {
+          const contents = column.content?.params?.content;
+          count += contents?.length ?? 0;
+          if (contents?.length > 0) {
+            lastContent = column.content.params.content[contents.length-1];
+          }
           return count;
         }, 0);
 
         // To avoid messy margin computation, separator setting should be disabled when there is more
         // than a single content inside a row. We also don't want a separator if we don't have any content
-        if (contentCount > 1 || contentCount === 0) {
+        if (useSeparator === 'auto' && (contentCount > 1 || contentCount === 0)) {
           useSeparator = 'disabled';
-        } else if (columnCount === 1) {
+        } else if (contentCount > 0) {
           // If we only have one content, we want to follow the same procedure as if that content was
-          // not wrapper on Row and RowColumn.
-          const contentInColumn = content.params.columns[0].content.params?.content[0];
-
-          addSeparator(contentInColumn.library.split(' ')[0], useSeparator ?? 'auto');
+          // not wrapped on Row and RowColumn. 
+          addSeparator(lastContent.library.split(' ')[0], useSeparator ?? 'auto');
           return;
         } else {
           // No separator.
@@ -242,7 +240,7 @@ H5P.Column = (function (EventDispatcher) {
       if (previousHasMargin !== undefined) {
 
         // Create separator element
-        var separator = document.createElement('div');
+        let separator = document.createElement('div');
 
         // If no margins, check for top margin only
         if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
