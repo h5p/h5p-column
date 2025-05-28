@@ -1,6 +1,14 @@
 .h5p-column-content {
   position: relative;
 }
+.h5p-column-content .table{
+  padding: 0px;
+  margin: 0px;
+  border-collapse: collapse;
+  border-color: #494949;
+  border-spacing: 0;
+  border-width: 1px;
+}
 .h5p-column-content.h5p-table,
 .h5p-column-content.h5p-advanced-text,
 .h5p-column-content.h5p-link {
