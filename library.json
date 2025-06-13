@@ -1,13 +1,13 @@
 {
   "machineName": "H5P.Column",
-  "title": "Column",
+  "title": "Page",
   "description": "Content holder displaying content in a column.",
   "contentType": "instructional",
   "license": "MIT",
   "author": "Joubel",
   "majorVersion": 1,
   "minorVersion": 18,
-  "patchVersion": 2,
+  "patchVersion": 6,
   "runnable": 1,
   "fullscreen": 0,
   "embedTypes": [
