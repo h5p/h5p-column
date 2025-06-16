@@ -16,7 +16,7 @@
 
 .h5p-column-content {
   margin: var(--h5p-theme-spacing-xs) var(--h5p-theme-spacing-xs);
-  box-shadow: 0px 8px 19.9px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.05);
   border: solid 1px var(--h5p-theme-stroke-1);
   border-radius: var(--h5p-theme-border-radius-large);
   padding: var(--h5p-theme-spacing-xs);
