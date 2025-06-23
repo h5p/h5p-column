@@ -130,3 +130,8 @@
   display: none; /* TODO: we have an issue to fix this */
 }
 
+/* Fix for footer in QuestionSet */
+.h5p-column.h5p-theme .qs-footer.h5p-navigation {
+  margin-top: 0px !important;
+  padding-bottom: var(--h5p-theme-spacing-s);
+}
