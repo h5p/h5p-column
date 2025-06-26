@@ -47,19 +47,6 @@
   width: 100%;
 }
 
-.h5p-column-ruler {
-  border-bottom: 2px solid #eee;
-}
-.h5p-column-space-before-n-after {
-  margin: 1em 0;
-}
-.h5p-column-space-before {
-  margin: 1em 0 0;
-}
-.h5p-column-space-after {
-  margin: 0 0 1em;
-}
-
 /* Align question texts when there's no frame */
 .h5p-no-frame > .h5p-column > div > .h5p-question > * {
   margin-left: 0;
@@ -122,12 +109,6 @@
 .h5p-interactive-book video::-webkit-media-controls-fullscreen-button,
 .h5p-interactive-book .h5p-my-fullscreen-button-enter {
   display: none;
-}
-
-/*H5P theme overrides (don't work with .h5p-theme) */
-.h5p-column-ruler {
-  border-bottom: 2px solid var(--h5p-theme-background) !important;
-  display: none; /* TODO: we have an issue to fix this */
 }
 
 /* Fix for footer in QuestionSet */
