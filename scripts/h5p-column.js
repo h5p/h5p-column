@@ -31,6 +31,8 @@ H5P.Column = (function (EventDispatcher) {
     // Column wrapper element
     var wrapper;
 
+    var boxContainer;
+
     // H5P content in the column
     var instances = [];
     var instanceContainers = [];
@@ -177,7 +179,7 @@ H5P.Column = (function (EventDispatcher) {
       });
 
       // Add to DOM wrapper
-      wrapper.appendChild(container);
+      boxContainer.appendChild(container);
     };
 
     /**
@@ -209,6 +211,7 @@ H5P.Column = (function (EventDispatcher) {
     var addSeparator = function (libraryName, useSeparator, content) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
+      var useBox = false;
 
       if (libraryName === 'H5P.Row') {
         let lastContent = null;
@@ -249,15 +252,7 @@ H5P.Column = (function (EventDispatcher) {
 
             // Only add separator if forced
             if (useSeparator === 'enabled') {
-              // Add ruler
-              separator.classList.add('h5p-column-ruler');
-
-              // Add space both before and after the ruler
-              separator.classList.add('h5p-column-space-before-n-after');
-            }
-            else {
-              // Default is to separte using a single space, no ruler
-              separator.classList.add('h5p-column-space-before');
+              useBox = true;
             }
           }
           else {
@@ -265,11 +260,7 @@ H5P.Column = (function (EventDispatcher) {
 
             // Only add separator if forced
             if (useSeparator === 'enabled') {
-              // Add ruler
-              separator.classList.add('h5p-column-ruler');
-
-              // Add space after the ruler
-              separator.classList.add('h5p-column-space-after');
+              useBox = true;
             }
           }
         }
@@ -278,24 +269,22 @@ H5P.Column = (function (EventDispatcher) {
 
           // Only add separator if forced
           if (useSeparator === 'enabled') {
-            // Add ruler
-            separator.classList.add('h5p-column-ruler');
-
-            // Add space after the ruler
-            separator.classList.add('h5p-column-space-before');
+            useBox = true;
           }
         }
         else {
           // Both already have margin
 
           if (useSeparator !== 'disabled') {
-            // Default is to add ruler unless its disabled
-            separator.classList.add('h5p-column-ruler');
+            useBox = true;
           }
         }
-
         // Insert into DOM
-        wrapper.appendChild(separator);
+        if (useBox) {
+          boxContainer = document.createElement('div');
+          boxContainer.classList.add('h5p-column-box-container');
+          wrapper.appendChild(boxContainer);
+        }
       }
 
       // Keep track of spacing for next separator
@@ -311,7 +300,9 @@ H5P.Column = (function (EventDispatcher) {
     var createHTML = function () {
       // Create wrapper
       wrapper = document.createElement('div');
-
+      boxContainer = document.createElement('div');
+      boxContainer.classList.add('h5p-column-box-container');
+      wrapper.appendChild(boxContainer);
       // Go though all contents
       for (var i = 0; i < params.content.length; i++) {
         var content = params.content[i];
