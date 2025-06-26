@@ -20,17 +20,11 @@
   "preloadedJs": [
     {
       "path": "scripts/h5p-column.js"
-    },
-    {
-      "path": "@legacy/scripts/h5p-column.js"
     }
   ],
   "preloadedCss": [
     {
       "path": "styles/h5p-column.css"
-    },
-    {
-      "path": "@legacy/styles/h5p-column.css"
     }
   ]
 }
