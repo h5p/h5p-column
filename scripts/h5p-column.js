@@ -31,6 +31,8 @@ H5P.Column = (function (EventDispatcher) {
     // Column wrapper element
     var wrapper;
 
+    var boxContainer;
+
     // H5P content in the column
     var instances = [];
     var instanceContainers = [];
@@ -128,11 +130,35 @@ H5P.Column = (function (EventDispatcher) {
       // Bubble resize events
       bubbleUp(instance, 'resize', self);
 
+      // Keep track of all instances that are tasks
+      const taskInstances = [];
+
       // Check if instance is a task
       if (Column.isTask(instance)) {
         // Tasks requires completion
+        taskInstances.push(instance);
+      }
 
-        instance.on('xAPI', trackScoring(numTasks));
+      // For H5P.Row, we'll retrieve the actual task instances
+      if (library === 'H5P.Row') {
+        const rowColumns = instance.getInstances();
+
+        // A row can have several columns
+        for (const rowColumn of rowColumns) {
+
+          // And each row column can have several content types,
+          // some of which might be tasks
+          const rowColumnInstances = rowColumn.getInstances();
+          for (const rowColumnInstance of rowColumnInstances) {
+            if (Column.isTask(rowColumnInstance)) {
+              taskInstances.push(rowColumnInstance);
+            }
+          }
+        }
+      }
+
+      for (const task of taskInstances) {
+        task.on('xAPI', trackScoring(numTasks));
         numTasks++;
       }
 
@@ -153,7 +179,7 @@ H5P.Column = (function (EventDispatcher) {
       });
 
       // Add to DOM wrapper
-      wrapper.appendChild(container);
+      boxContainer.appendChild(container);
     };
 
     /**
@@ -182,71 +208,60 @@ H5P.Column = (function (EventDispatcher) {
      * @param {string} libraryName Name of the next content type
      * @param {string} useSeparator
      */
-    var addSeparator = function (libraryName, useSeparator) {
+    var addSeparator = function (libraryName, useSeparator, content) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
+      let useBox = false;
+
+      if (libraryName === 'H5P.Row') {
+        let lastContent = null;
+        let contentCount = content.params?.columns?.reduce((count, column) => {
+          const contents = column.content?.params?.content;
+          count += contents?.length ?? 0;
+          if (contents?.length > 0) {
+            lastContent = column.content.params.content[contents.length-1];
+          }
+          return count;
+        }, 0);
+
+        // To avoid messy margin computation, separator setting should be disabled when there is more
+        // than a single content inside a row. We also don't want a separator if we don't have any content
+        if (useSeparator === 'auto' && (contentCount > 1 || contentCount === 0)) {
+          useSeparator = 'disabled';
+        } else if (contentCount > 0) {
+          // If we only have one content, we want to follow the same procedure as if that content was
+          // not wrapped on Row and RowColumn. 
+          addSeparator(lastContent.library.split(' ')[0], useSeparator ?? 'auto');
+          return;
+        } else {
+          // No separator.
+          return;
+        }
+      }
 
       // Only add if previous content exists
       if (previousHasMargin !== undefined) {
-
-        // Create separator element
-        var separator = document.createElement('div');
-        //separator.classList.add('h5p-column-ruler');
-
         // If no margins, check for top margin only
         if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
-          if (!previousHasMargin) {
-            // None of them have margin
-
-            // Only add separator if forced
-            if (useSeparator === 'enabled') {
-              // Add ruler
-              separator.classList.add('h5p-column-ruler');
-
-              // Add space both before and after the ruler
-              separator.classList.add('h5p-column-space-before-n-after');
-            }
-            else {
-              // Default is to separte using a single space, no ruler
-              separator.classList.add('h5p-column-space-before');
-            }
-          }
-          else {
-            // We don't have any margin but the previous content does
-
-            // Only add separator if forced
-            if (useSeparator === 'enabled') {
-              // Add ruler
-              separator.classList.add('h5p-column-ruler');
-
-              // Add space after the ruler
-              separator.classList.add('h5p-column-space-after');
-            }
-          }
-        }
-        else if (!previousHasMargin) {
-          // We have margin but not the previous content doesn't
-
-          // Only add separator if forced
           if (useSeparator === 'enabled') {
-            // Add ruler
-            separator.classList.add('h5p-column-ruler');
-
-            // Add space after the ruler
-            separator.classList.add('h5p-column-space-before');
+            useBox = true;
           }
         }
-        else {
-          // Both already have margin
-
-          if (useSeparator !== 'disabled') {
-            // Default is to add ruler unless its disabled
-            separator.classList.add('h5p-column-ruler');
-          }
+        // If we don't have margins, but the content has separator explictly set,
+        // we use a box.
+        else if (!previousHasMargin && useSeparator === 'enabled') {
+          useBox = true;
         }
-
+        // If we have margins, we need to make sure separators are not explicitly disabled.
+        else if (previousHasMargin && useSeparator !== 'disabled') {
+          useBox = true;
+        }
         // Insert into DOM
-        wrapper.appendChild(separator);
+        if (useBox) {
+          boxContainer = document.createElement('div');
+          boxContainer.classList.add('h5p-column-box-container');
+          wrapper.appendChild(boxContainer);
+        }
       }
 
       // Keep track of spacing for next separator
@@ -262,7 +277,9 @@ H5P.Column = (function (EventDispatcher) {
     var createHTML = function () {
       // Create wrapper
       wrapper = document.createElement('div');
-
+      boxContainer = document.createElement('div');
+      boxContainer.classList.add('h5p-column-box-container');
+      wrapper.appendChild(boxContainer);
       // Go though all contents
       for (var i = 0; i < params.content.length; i++) {
         var content = params.content[i];
@@ -276,7 +293,7 @@ H5P.Column = (function (EventDispatcher) {
         if (params.useSeparators) { // (check for global override)
 
           // Add separator between contents
-          addSeparator(content.content.library.split(' ')[0], content.useSeparator);
+          addSeparator(content.content.library.split(' ')[0], content.useSeparator, content.content);
         }
 
         // Add content

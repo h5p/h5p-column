@@ -14,7 +14,7 @@
   position: relative;
 }
 
-.h5p-column-content {
+.h5p-column-box-container {
   margin: var(--h5p-theme-spacing-xs) var(--h5p-theme-spacing-xs);
   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.05);
   border: solid 1px var(--h5p-theme-stroke-1);
@@ -45,19 +45,6 @@
 }
 .h5p-column-content.h5p-video > video {
   width: 100%;
-}
-
-.h5p-column-ruler {
-  border-bottom: 2px solid #eee;
-}
-.h5p-column-space-before-n-after {
-  margin: 1em 0;
-}
-.h5p-column-space-before {
-  margin: 1em 0 0;
-}
-.h5p-column-space-after {
-  margin: 0 0 1em;
 }
 
 /* Align question texts when there's no frame */
@@ -124,15 +111,15 @@
   display: none;
 }
 
-/*H5P theme overrides (don't work with .h5p-theme) */
-.h5p-column-ruler {
-  border-bottom: 2px solid var(--h5p-theme-background) !important;
-  display: none; /* TODO: we have an issue to fix this */
-}
-
 /* Fix for footer in QuestionSet */
 .h5p-column.h5p-theme .qs-footer.h5p-navigation {
   margin-top: 0px !important;
   margin-inline: calc(-1 * var(--h5p-theme-spacing-s));
   padding-bottom: var(--h5p-theme-spacing-s);
+}
+
+/* In LB we can get two levels of columns so we don't want the background color
+  on the "inner" column. */
+.h5p-column .h5p-column {
+  background-color: revert;
 }
