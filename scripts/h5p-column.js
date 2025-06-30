@@ -211,7 +211,7 @@ H5P.Column = (function (EventDispatcher) {
     var addSeparator = function (libraryName, useSeparator, content) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
-      var useBox = false;
+      let useBox = false;
 
       if (libraryName === 'H5P.Row') {
         let lastContent = null;
@@ -241,43 +241,20 @@ H5P.Column = (function (EventDispatcher) {
 
       // Only add if previous content exists
       if (previousHasMargin !== undefined) {
-
-        // Create separator element
-        let separator = document.createElement('div');
-
         // If no margins, check for top margin only
         if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
-          if (!previousHasMargin) {
-            // None of them have margin
-
-            // Only add separator if forced
-            if (useSeparator === 'enabled') {
-              useBox = true;
-            }
-          }
-          else {
-            // We don't have any margin but the previous content does
-
-            // Only add separator if forced
-            if (useSeparator === 'enabled') {
-              useBox = true;
-            }
-          }
-        }
-        else if (!previousHasMargin) {
-          // We have margin but not the previous content doesn't
-
-          // Only add separator if forced
           if (useSeparator === 'enabled') {
             useBox = true;
           }
         }
-        else {
-          // Both already have margin
-
-          if (useSeparator !== 'disabled') {
-            useBox = true;
-          }
+        // If we don't have margins, but the content has separator explictly set,
+        // we use a box.
+        else if (!previousHasMargin && useSeparator === 'enabled') {
+          useBox = true;
+        }
+        // If we have margins, we need to make sure separators are not explicitly disabled.
+        else if (previousHasMargin && useSeparator !== 'disabled') {
+          useBox = true;
         }
         // Insert into DOM
         if (useBox) {
