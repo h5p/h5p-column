@@ -317,6 +317,10 @@ H5P.Column = (function (EventDispatcher) {
         .forEach(function (container) {
           instances[container.instanceIndex]
             .attach(H5P.jQuery(container.container));
+          if (instances[container.instanceIndex].libraryInfo?.machineName === 'H5P.Collage') {
+            // Do not allow collage to set styling on box containers
+            container.container?.parentElement?.removeAttribute('style');
+          }
 
           // Remove any fullscreen buttons
           disableFullscreen(instances[container.instanceIndex]);
