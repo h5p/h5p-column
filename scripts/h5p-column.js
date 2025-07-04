@@ -169,6 +169,12 @@ H5P.Column = (function (EventDispatcher) {
           self.trigger('resize');
         });
       }
+      else if (library === 'H5P.Collage') {
+        window.requestAnimationFrame(() => {
+          // Do not allow collage to set styling on box containers
+          boxContainer.removeAttribute('style');
+        });
+      }
 
       // Keep track of all instances
       instances.push(instance);
