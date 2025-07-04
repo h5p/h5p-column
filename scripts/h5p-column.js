@@ -124,13 +124,6 @@ H5P.Column = (function (EventDispatcher) {
         content.params.visuals.fit = false;
       }
 
-      if (library === 'H5P.Collage') {
-        window.requestAnimationFrame(() => {
-          // Do not allow collage to set styling on box containers
-          boxContainer.removeAttribute('style');
-        });
-      }
-
       // Create content instance
       var instance = H5P.newRunnable(content, id, undefined, true, contentData);
 
@@ -174,6 +167,12 @@ H5P.Column = (function (EventDispatcher) {
 
         instance.on('loaded', function () {
           self.trigger('resize');
+        });
+      }
+      else if (library === 'H5P.Collage') {
+        window.requestAnimationFrame(() => {
+          // Do not allow collage to set styling on box containers
+          boxContainer.removeAttribute('style');
         });
       }
 
