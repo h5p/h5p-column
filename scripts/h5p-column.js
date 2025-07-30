@@ -172,7 +172,7 @@ H5P.Column = (function (EventDispatcher) {
       else if (library === 'H5P.Collage') {
         window.requestAnimationFrame(() => {
           // Do not allow collage to set styling on box containers
-          boxContainer.removeAttribute('style');
+          container.parentNode.removeAttribute('style');
         });
       }
 
@@ -236,7 +236,7 @@ H5P.Column = (function (EventDispatcher) {
           useSeparator = 'disabled';
         } else if (contentCount > 0) {
           // If we only have one content, we want to follow the same procedure as if that content was
-          // not wrapped on Row and RowColumn. 
+          // not wrapped on Row and RowColumn.
           addSeparator(lastContent.library.split(' ')[0], useSeparator ?? 'auto');
           return;
         } else {
