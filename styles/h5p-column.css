@@ -114,7 +114,6 @@
 /* Fix for footer in QuestionSet */
 .h5p-column.h5p-theme .qs-footer.h5p-navigation {
   margin-top: 0px !important;
-  margin-inline: calc(-1 * var(--h5p-theme-spacing-s));
   padding-bottom: var(--h5p-theme-spacing-s);
 }
 
