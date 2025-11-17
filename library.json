@@ -6,13 +6,11 @@
   "license": "MIT",
   "author": "Joubel",
   "majorVersion": 1,
-  "minorVersion": 18,
-  "patchVersion": 6,
+  "minorVersion": 19,
+  "patchVersion": 7,
   "runnable": 1,
   "fullscreen": 0,
-  "embedTypes": [
-    "iframe"
-  ],
+  "embedTypes": ["iframe"],
   "coreApi": {
     "majorVersion": 1,
     "minorVersion": 27
