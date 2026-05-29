@@ -31,6 +31,8 @@ H5P.Column = (function (EventDispatcher) {
     // Column wrapper element
     var wrapper;
 
+    var boxContainer;
+
     // H5P content in the column
     var instances = [];
     var instanceContainers = [];
@@ -167,6 +169,12 @@ H5P.Column = (function (EventDispatcher) {
           self.trigger('resize');
         });
       }
+      else if (library === 'H5P.Collage') {
+        window.requestAnimationFrame(() => {
+          // Do not allow collage to set styling on box containers
+          container.parentNode.removeAttribute('style');
+        });
+      }
 
       // Keep track of all instances
       instances.push(instance);
@@ -177,7 +185,7 @@ H5P.Column = (function (EventDispatcher) {
       });
 
       // Add to DOM wrapper
-      wrapper.appendChild(container);
+      boxContainer.appendChild(container);
     };
 
     /**
@@ -209,6 +217,7 @@ H5P.Column = (function (EventDispatcher) {
     var addSeparator = function (libraryName, useSeparator, content) {
       // Determine separator spacing
       var thisHasMargin = (hasMargins.indexOf(libraryName) !== -1);
+      let useBox = false;
 
       if (libraryName === 'H5P.Row') {
         let lastContent = null;
@@ -227,7 +236,7 @@ H5P.Column = (function (EventDispatcher) {
           useSeparator = 'disabled';
         } else if (contentCount > 0) {
           // If we only have one content, we want to follow the same procedure as if that content was
-          // not wrapped on Row and RowColumn. 
+          // not wrapped on Row and RowColumn.
           addSeparator(lastContent.library.split(' ')[0], useSeparator ?? 'auto');
           return;
         } else {
@@ -238,64 +247,27 @@ H5P.Column = (function (EventDispatcher) {
 
       // Only add if previous content exists
       if (previousHasMargin !== undefined) {
-
-        // Create separator element
-        let separator = document.createElement('div');
-
         // If no margins, check for top margin only
         if (!thisHasMargin && (hasTopMargins.indexOf(libraryName) === -1)) {
-          if (!previousHasMargin) {
-            // None of them have margin
-
-            // Only add separator if forced
-            if (useSeparator === 'enabled') {
-              // Add ruler
-              separator.classList.add('h5p-column-ruler');
-
-              // Add space both before and after the ruler
-              separator.classList.add('h5p-column-space-before-n-after');
-            }
-            else {
-              // Default is to separte using a single space, no ruler
-              separator.classList.add('h5p-column-space-before');
-            }
-          }
-          else {
-            // We don't have any margin but the previous content does
-
-            // Only add separator if forced
-            if (useSeparator === 'enabled') {
-              // Add ruler
-              separator.classList.add('h5p-column-ruler');
-
-              // Add space after the ruler
-              separator.classList.add('h5p-column-space-after');
-            }
-          }
-        }
-        else if (!previousHasMargin) {
-          // We have margin but not the previous content doesn't
-
-          // Only add separator if forced
           if (useSeparator === 'enabled') {
-            // Add ruler
-            separator.classList.add('h5p-column-ruler');
-
-            // Add space after the ruler
-            separator.classList.add('h5p-column-space-before');
+            useBox = true;
           }
         }
-        else {
-          // Both already have margin
-
-          if (useSeparator !== 'disabled') {
-            // Default is to add ruler unless its disabled
-            separator.classList.add('h5p-column-ruler');
-          }
+        // If we don't have margins, but the content has separator explictly set,
+        // we use a box.
+        else if (!previousHasMargin && useSeparator === 'enabled') {
+          useBox = true;
         }
-
+        // If we have margins, we need to make sure separators are not explicitly disabled.
+        else if (previousHasMargin && useSeparator !== 'disabled') {
+          useBox = true;
+        }
         // Insert into DOM
-        wrapper.appendChild(separator);
+        if (useBox) {
+          boxContainer = document.createElement('div');
+          boxContainer.classList.add('h5p-column-box-container');
+          wrapper.appendChild(boxContainer);
+        }
       }
 
       // Keep track of spacing for next separator
@@ -311,7 +283,9 @@ H5P.Column = (function (EventDispatcher) {
     var createHTML = function () {
       // Create wrapper
       wrapper = document.createElement('div');
-
+      boxContainer = document.createElement('div');
+      boxContainer.classList.add('h5p-column-box-container');
+      wrapper.appendChild(boxContainer);
       // Go though all contents
       for (var i = 0; i < params.content.length; i++) {
         var content = params.content[i];
@@ -354,9 +328,8 @@ H5P.Column = (function (EventDispatcher) {
           disableFullscreen(instances[container.instanceIndex]);
         });
 
-
       // Add to DOM
-      $container.addClass('h5p-column').html('').append(wrapper);
+      $container.addClass('h5p-column h5p-theme').html('').append(wrapper);
     };
 
     /**
