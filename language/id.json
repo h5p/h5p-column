@@ -1,0 +1,29 @@
+{
+  "semantics": [
+    {
+      "label": "Daftar Konten Kolom",
+      "entity": "konten",
+      "field": {
+        "fields": [
+          {
+            "label": "Konten"
+          },
+          {
+            "label": "Pisahkan konten dengan garis horizontal",
+            "options": [
+              {
+                "label": "Otomatis (bawaan)"
+              },
+              {
+                "label": "Jangan pernah gunakan penggaris di atas"
+              },
+              {
+                "label": "Selalu gunakan penggaris di atas"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
